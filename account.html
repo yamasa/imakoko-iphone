@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>「今ココなう！」アカウント情報入力</title>
+<link rel="stylesheet" type="text/css" href="/static/iphone.css">
+<script type="text/javascript">
+var submitFlag = false;
+function checkFlag() {
+	if (submitFlag) return false;
+	submitFlag = true;
+	return true;
+}
+function doSubmit() {
+	if (checkFlag()) document.forms[0].submit();
+}
+</script>
+</head>
+<body class="stripe">
+
+<div class="toolbar">
+<h1>アカウント入力</h1>
+<a href="javascript:location.href='settings.html'" class="backButton">中止</a>
+<a href="javascript:doSubmit()" class="blueButton">登録</a>
+</div>
+
+<div class="panel">
+<h2>今ココなう！ アカウント情報</h2>
+{% if error %}
+<p>ユーザーIDまたはパスワードが正しくありません。</p>
+{% endif %}
+<form method="POST" action="account.html" onsubmit="return checkFlag()">
+<dl class="form">
+<dt>ユーザーID</dt>
+<dd>
+<input name="user" type="text" value="{{ user|default:""|escape }}">
+</dd>
+<dt>パスワード</dt>
+<dd>
+<input name="passwd" type="password">
+</dd>
+</dl>
+<input name="token" type="hidden" value="{{ token }}">
+</form>
+<p>
+はじめに<a href="https://imakoko-gps.appspot.com/create_user" target="_blank">こちらのページ</a>にて「今ココなう！」のユーザーを作成し、その情報を入力してください。大文字・小文字を間違えないようご注意ください。
+</p>
+</div>
+
+</body>
+</html>

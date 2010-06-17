@@ -1,0 +1,56 @@
+#home_button, #list_button, #reload_button {
+	display: none;
+}
+
+#map_canvas {
+	display: none;
+	position: absolute;
+	top: 44px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+}
+body.landscape > #map_canvas {
+	top: 32px;
+}
+
+#user_list {
+	display: none;
+	padding: 0;
+}
+#user_list > li {
+	display: block;
+	cursor: pointer;
+	margin: 0;
+	padding: 0 16px 0 10px;
+	height: 36px;
+	line-height: 36px;
+	border-bottom: 1px solid #e0e0e0;
+	background: url(/img/listArrow.png) no-repeat right center;
+	font-weight: bold;
+	font-size: 20px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+#user_list > li.ustream:after {
+	content: url(/img/ustream.png)
+}
+#user_list > li.justin:after {
+	content: url(/img/justin.png)
+}
+#user_list > li.nicolive:after {
+	content: url(/img/nicolive.png)
+}
+.userwindow > a {
+	color: #000000;
+	text-decoration: none;
+	line-height: 1.5;
+}
+.userwindow > a:first-child {
+	color: #0000cd;
+	font-size: 120%;
+	font-weight: bold;
+}

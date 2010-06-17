@@ -1,0 +1,52 @@
+application: imakoko-iphone
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /api/.*
+  script: imakoko.py
+
+- url: /account\.html
+  script: imakoko.py
+  secure: always
+
+- url: /[^/]+\.html
+  script: imakoko.py
+  secure: never
+
+- url: /twitter/.*
+  script: twitter.py
+
+- url: /cron/.*
+  script: cron.py
+  login: admin
+
+- url: /
+  static_files: index.html
+  upload: index.html
+
+- url: /m/.*
+  static_files: usermap.html
+  upload: usermap.html
+
+- url: /static
+  static_dir: static
+
+- url: /img
+  static_dir: img
+  expiration: "7d"
+
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon.ico
+  mime_type: image/vnd.microsoft.icon
+  expiration: "7d"
+
+- url: /robots\.txt
+  static_files: robots.txt
+  upload: robots.txt
+  expiration: "7d"
+
+- url: /.*
+  script: notfound.py

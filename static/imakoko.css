@@ -1,0 +1,89 @@
+#map_canvas {
+	position: absolute;
+	top: 84px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+}
+body.landscape > #map_canvas {
+	top: 32px;
+	bottom: 0;
+	left: 70px;
+	right: 0;
+}
+body.landscape.right > #map_canvas {
+	left: 0;
+	right: 70px;
+}
+
+#imakoko_control {
+	position: absolute;
+	top: 44px;
+	bottom: auto;
+	height: 40px;
+	left: 0;
+	right: 0;
+	width: auto;
+	margin: 0;
+	padding: 0;
+}
+body.landscape > #imakoko_control {
+	top: 32px;
+	bottom: 0;
+	height: auto;
+	left: 0;
+	right: auto;
+	width: 70px;
+}
+body.landscape.right > #imakoko_control {
+	left: auto;
+	right: 0;
+}
+#imakoko_control > a {
+	position: absolute;
+	top: 3px;
+	left: 50%;
+	right: auto;
+	width: 120px;
+	line-height: 32px;
+	font-weight: bold;
+	font-size: 14px;
+	text-decoration: none;
+	color: #324f85;
+	background: #ffffff;
+	border: 1px solid #b4b4b4;
+	text-align: center;
+	overflow: hidden;
+	white-space: nowrap;
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+}
+body.landscape > #imakoko_control > a {
+	left: 0;
+	right: 0;
+	width: 64px;
+	line-height: 44px;
+}
+#autoimkk {
+	margin: 0 0 0 -125px;
+}
+body.landscape > #imakoko_control > #autoimkk {
+	margin: 0 auto;
+	top: 32px;
+}
+#autoimkk.running {
+	background: #eb280a;
+}
+#autotwit {
+	margin: 0 0 0 5px;
+}
+body.landscape > #imakoko_control > #autotwit {
+	margin: 0 auto;
+	top: 106px;
+}
+#autotwit.running {
+	background: #20ad14;
+}

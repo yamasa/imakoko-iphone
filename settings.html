@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>今ココなう！ 設定</title>
+<link rel="stylesheet" type="text/css" href="/static/iphone.css">
+<script type="text/javascript">
+function bindLocalStorage(name, defaultValue) {
+	var node = document.getElementById(name);
+	var value = localStorage[name] || defaultValue;
+
+	switch (node.type) {
+	case "text":
+		node.value = value;
+		node.addEventListener("change", function() {
+			localStorage[name] = node.value;
+		}, false);
+		break;
+	case "select-one":
+		for (var i = 0; i < node.options.length; i++) {
+			if (node.options[i].value == value) {
+				node.options[i].selected = true;
+				break;
+			}
+		}
+		node.addEventListener("change", function() {
+			var index = node.selectedIndex;
+			localStorage[name] = node.options[index].value;
+		}, false);
+		break;
+	}
+}
+
+window.addEventListener("load", function() {
+	bindLocalStorage("imakokoShasai", "0");
+	bindLocalStorage("imakokoShasaiRoute", "1");
+	bindLocalStorage("imakokoInterval", "20000");
+	bindLocalStorage("imakokoTermType", "0");
+	bindLocalStorage("imakokoSave", "1");
+	bindLocalStorage("imakokoTwitSkip", "19");
+	bindLocalStorage("imakokoTwitGeoLevel", "0");
+	bindLocalStorage("imakokoTwitLocation", "BOTH");
+	bindLocalStorage("imakokoTwitHashtag", "BOTH");
+	bindLocalStorage("imakokoTwitHeader", "ｲﾏｺｺ! L:");
+	bindLocalStorage("imakokoTwitFooter", "");
+}, false);
+
+function twitterOAuth() {
+	if(confirm("Twitterのページに移動します。\nユーザー名とパスワードを入力して\n「許可する」を押してください。")) {
+		location.href = "/twitter/oauth";
+	}
+}
+</script>
+</head>
+<body class="stripe">
+
+<div class="toolbar">
+<h1>設定</h1>
+<a href="javascript:location.href='imakoko.html'" class="backButton">ホーム</a>
+</div>
+
+<div class="panel">
+<h2>第5回 秋の車載動画オフ</h2>
+<dl class="form">
+<dt>集合場所へのルート表示</dt>
+<dd>
+<select id="imakokoShasai">
+<option value="0">表示しない</option>
+<option value="1">表示する</option>
+</select>
+</dd>
+<dt>高速道路・有料道路の利用</dt>
+<dd>
+<select id="imakokoShasaiRoute">
+<option value="0">利用しない</option>
+<option value="1">利用する</option>
+</select>
+</dd>
+</dl>
+<p>
+車載動画オフについては<a href="http://eki.bz/caroff5th" target="_blank">こちら</a>
+</p>
+
+<h2>アカウント情報</h2>
+<dl class="form">
+<dt>今ココなう！</dt>
+<dd>
+<a href="javascript:location.href='account.html'">{{ account.imakoko_user|default:"未登録"|escape }}</a>
+</dd>
+<dt>Twitter</dt>
+<dd>
+<a href="javascript:twitterOAuth()">{{ account.twitter_user|default:"未登録"|escape }}</a>
+</dd>
+</dl>
+
+<h2>今ココなう！設定</h2>
+<dl class="form">
+<dt>自動送信間隔</dt>
+<dd>
+<select id="imakokoInterval">
+<option value="10000">10秒</option>
+<option value="20000">20秒</option>
+<option value="30000">30秒</option>
+</select>
+</dd>
+<dt>マーカー種別</dt>
+<dd>
+<select id="imakokoTermType">
+<option value="0">矢印</option>
+<option value="1">携帯電話</option>
+<option value="2">飛行機</option>
+<option value="3">電車</option>
+<option value="4">新幹線</option>
+<option value="5">バス</option>
+<option value="6">自転車</option>
+<option value="7">徒歩</option>
+<option value="8">バイク</option>
+<option value="9">ヘリコプター</option>
+<option value="10">船</option>
+<option value="99">Twitterアイコン</option>
+</select>
+</dd>
+<dt>GPSデータ保存</dt>
+<dd>
+<select id="imakokoSave">
+<option value="0">保存しない</option>
+<option value="1">保存する</option>
+</select>
+</dd>
+</dl>
+
+<h2>Twitter設定</h2>
+<dl class="form">
+<dt>自動twit間隔</dt>
+<dd>
+<select id="imakokoTwitSkip">
+<option value="9">10分</option>
+<option value="19">20分</option>
+<option value="29">30分</option>
+<option value="39">40分</option>
+<option value="49">50分</option>
+<option value="59">60分</option>
+</select>
+</dd>
+<dt>住所表示レベル</dt>
+<dd>
+<select id="imakokoTwitGeoLevel">
+<option value="0">地区名と番地</option>
+<option value="1">地区名まで</option>
+</select>
+</dd>
+<dt>位置情報(ジオタグ)</dt>
+<dd>
+<select id="imakokoTwitLocation">
+<option value="NONE">付加しない</option>
+<option value="BOTH">付加する</option>
+</select>
+</dd>
+<dt>ハッシュタグ(#imacoconow)</dt>
+<dd>
+<select id="imakokoTwitHashtag">
+<option value="NONE">付けない</option>
+<option value="BOTH">付ける</option>
+</select>
+</dd>
+<dt>ｲﾏｺｺ!ヘッダー</dt>
+<dd>
+<input id="imakokoTwitHeader" type="text">
+</dd>
+<dt>フッター</dt>
+<dd>
+<input id="imakokoTwitFooter" type="text">
+</dd>
+</dl>
+<p>
+フッターに「%map%」と入力すると、<br>
+現在位置を示す地図URLに置き換えられます。
+</p>
+</div>
+
+</body>
+</html>

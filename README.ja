@@ -1,0 +1,27 @@
+今ココなう！ Webアプリケーションクライアント
+
+  このソフトウェアは、WebブラウザのGeolocation APIを利用して
+  「今ココなう！」やTwitterへの投稿を行なったりする、
+  Google App Engine上で動作するWebアプリケーションです。
+
+  twitter.py の頭のほうにある "Twitter OAuth Consumer Key" と
+  "bit.ly API Key" を書き換え、app.yaml の先頭行の application 名を
+  変更して Google App Engine にデプロイすることで
+  実行させることができます。
+
+
+ライセンス
+
+  このソフトウェアは修正BSDライセンスで提供されます。
+  利用や再配布については COPYRIGHT ファイルの記述に従ってください。
+  ただし、img ディレクトリ配下のファイルについては、
+    backButton.png
+    blueButton.png
+    listArrow.png
+    pinstripes.png
+    toolButton.png
+    toolbar.png
+  が iUI(http://code.google.com/p/iui/) のものを、それ以外は
+  今ココなう！Proxy(http://www.fujita-lab.com/imakoko/download.html) の
+  ものを加工して使用しています。そのため、これらのファイルについては
+  iUIや今ココなう！Proxyのライセンスに準拠します。

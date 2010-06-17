@@ -1,0 +1,210 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Helvetica, Arial, sans-serif;
+	color: #000000;
+	background: #ffffff;
+	-webkit-user-select: none;
+	-webkit-text-size-adjust: none;
+}
+body.stripe {
+	background: url(/img/pinstripes.png) #c5ccd4;
+}
+
+body > .toolbar {
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	position: absolute;
+	z-index: 3;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 44px;
+	background: url(/img/toolbar.png) #6d84a2 repeat-x left center;
+	border-bottom: 1px solid #2d3642;
+}
+.toolbar > h1 {
+	position: absolute;
+	top: 2px;
+	left: 50%;
+	margin: 0 0 0 -27%;
+	width: 55%;
+	line-height: 40px;
+	font-weight: bold;
+	font-size: 20px;
+	color: #ffffff;
+	text-shadow: rgba(0, 0, 0, 0.4) 0 -1px 0;
+	text-align: center;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.toolbar > a {
+	position: absolute;
+	top: 7px;
+	right: 6px;
+	left: auto;
+	margin: 0;
+	border-width: 0 5px;
+	padding: 0 3px;
+	line-height: 30px;
+	font-weight: bold;
+	font-size: 12px;
+	text-decoration: none;
+	color: #ffffff;
+	text-shadow: rgba(0, 0, 0, 0.6) 0 -1px 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	border-image: url(/img/toolButton.png) 0 5 0 5;
+	-webkit-border-image: url(/img/toolButton.png) 0 5 0 5;
+	-moz-border-image: url(/img/toolButton.png) 0 5 0 5;
+}
+.toolbar > a.blueButton {
+	border-image: url(/img/blueButton.png) 0 5 0 5;
+	-webkit-border-image: url(/img/blueButton.png) 0 5 0 5;
+	-moz-border-image: url(/img/blueButton.png) 0 5 0 5;
+}
+.toolbar > a.leftButton {
+	left: 6px;
+	right: auto;
+}
+.toolbar > a.backButton {
+	left: 6px;
+	right: auto;
+	border-width: 0 8px 0 14px;
+	padding: 0;
+	border-image: url(/img/backButton.png) 0 8 0 14;
+	-webkit-border-image: url(/img/backButton.png) 0 8 0 14;
+	-moz-border-image: url(/img/backButton.png) 0 8 0 14;
+}
+body.landscape > .toolbar {
+	height: 32px;
+}
+body.landscape > .toolbar > h1 {
+	top: 2px;
+	line-height: 28px;
+	font-size: 18px;
+}
+body.landscape > .toolbar > a {
+	top: 3px;
+	line-height: 26px;
+}
+
+body > * {
+	margin: 0;
+}
+body > .toolbar + * {
+	margin: 44px 0 0 0;
+}
+body.landscape > .toolbar + * {
+	margin: 32px 0 0 0;
+}
+body > .panel {
+	padding: 10px 10px 20px;
+}
+body > .panel > p {
+	color: #4c566c;
+	font-weight: bold;
+	font-size: 14px;
+	text-shadow: #ffffff 0 1px 0;
+	margin: 5px 0 20px;
+}
+body > .panel > p a {
+	color: #601992;
+	text-shadow: none;
+}
+
+h2 {
+	color: #4c566c;
+	font-weight: bold;
+	font-size: 18px;
+	text-shadow: #ffffff 0 1px 0;
+	margin: 8px 10px;
+}
+dl + h2, ul + h2 {
+	margin: 20px 10px 8px;
+}
+
+dl.form {
+	background: #ffffff;
+	border: 1px solid #b4b4b4;
+	margin: 5px 0;
+	padding: 0;
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+}
+dl.form dt {
+	color: #606060;
+	font-weight: bold;
+	font-size: 14px;
+	border-top: 1px solid #b4b4b4;
+	margin: 0;
+	padding: 2px 8px 0;
+}
+dl.form dt:first-child {
+	border-top: 0;
+}
+dl.form dd {
+	margin: 0;
+	padding: 1px 0 2px;
+}
+dl.form dd a {
+	display: block;
+	color: #000000;
+	font-weight: normal;
+	font-size: 18px;
+	background: url(/img/listArrow.png) no-repeat right center;
+	text-decoration: none;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	padding: 1px 16px 2px 7px;
+}
+dl.form dd input[type="text"], dl.form dd input[type="password"] {
+	color: #000000;
+	font-weight: normal;
+	font-size: 18px;
+	border: 0;
+	background: url(/img/space.gif) no-repeat right center;
+	width: 100%;
+	padding: 0 0 0 7px;
+}
+dl.form dd select {
+	color: #000000;
+	font-weight: normal;
+	font-size: 18px;
+	border: 0;
+	background: url(/img/listArrow.png) no-repeat right center;
+	width: 100%;
+	padding: 0 0 0 7px;
+	appearance: field;
+	-webkit-appearance: textfield;
+	-moz-appearance: textfield;
+}
+
+ul.text {
+	background: #ffffff;
+	border: 1px solid #b4b4b4;
+	margin: 5px 0;
+	padding: 0;
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+}
+ul.text li {
+	color: #606060;
+	font-weight: normal;
+	font-size: 14px;
+	border-top: 1px solid #b4b4b4;
+	margin: 0;
+	padding: 10px;
+}
+ul.text li:first-child {
+	border-top: 0;
+}
+ul.text li p {
+	margin: 0;
+}

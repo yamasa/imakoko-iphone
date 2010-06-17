@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>今ココなう！</title>
+<link rel="stylesheet" type="text/css" href="/static/iphone.css">
+<link rel="stylesheet" type="text/css" href="/static/usermap.css">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="apple-touch-startup-image" href="/img/startup.png">
+</head>
+<body>
+
+<div class="toolbar">
+<h1 id="page_title">今ココなう！</h1>
+<a href="javascript:location.href='/imakoko.html'" id="home_button" class="backButton">ホーム</a>
+<a href="javascript:reloadList()" id="reload_button">更新</a>
+<a href="javascript:changeListMode()" id="list_button" class="backButton">一覧</a>
+</div>
+
+<ul id="user_list"></ul>
+<div id="map_canvas"></div>
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" charset="UTF-8" src="/static/map.js"></script>
+<script type="text/javascript" charset="UTF-8" src="/static/usermap.js"></script>
+</body>
+</html>

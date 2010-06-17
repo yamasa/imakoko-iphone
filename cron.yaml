@@ -1,0 +1,4 @@
+cron:
+- description: Clean old Accounts.
+  url: /cron/cleanAccounts
+  schedule: every 3 hours
