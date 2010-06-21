@@ -87,7 +87,7 @@ class AccountPage(common.BasePage):
             session_id = str(account.session_id)
         else:
             session_id = self.create_temporary_sid()
-        token = '%032X' % getrandbits(128)
+        token = '%016x' % getrandbits(64)
         memcache.set('ACCOUNT_' + session_id, token, 3600)
         self.show_html('account.html', {'user': account and account.imakoko_user, 'token': token})
 

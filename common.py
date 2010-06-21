@@ -4,6 +4,7 @@
 import logging
 from datetime import datetime, timedelta
 from random import getrandbits
+from os import urandom
 
 from google.appengine.ext import db, webapp
 from google.appengine.ext.webapp import template
@@ -27,10 +28,10 @@ class BasePage(webapp.RequestHandler):
             return None
 
     def put_with_new_sid(self, account):
-        account.session_token = '%016X' % getrandbits(64)
+        account.session_token = '%016x' % getrandbits(64)
         account.last_login = datetime.utcnow()
         while True:
-            session_id = '%032X' % getrandbits(128)
+            session_id = urandom(16).encode('hex')
             account.session_id = session_id
             account.put()
             try:
@@ -48,7 +49,7 @@ class BasePage(webapp.RequestHandler):
             'IMAKOKO_SID=' + str(account.session_id) + '; expires=' + expires.strftime('%a, %d-%b-%Y %H:%M:%S GMT') + '; path=/; httponly')
 
     def create_temporary_sid(self):
-        session_id = 'X%032X' % getrandbits(128)
+        session_id = 'x%031x' % getrandbits(124)
         expires = datetime.utcnow() + timedelta(hours=1)
         self.response.headers.add_header(
             'Set-Cookie',
