@@ -421,8 +421,9 @@ var imakokoMap = {
 function decodeGeocoderResponse(responses, detail) {
 	var street_address = "";
 	var neighborhood = "";
+	var sublocality_l = "";
+	var sublocality_h = "";
 	var sublocality = "";
-	var sublocality_top = "";
 	var locality = "";
 	var other = "";
 	for (var i = 0; i < responses.length; i++) {
@@ -435,9 +436,16 @@ function decodeGeocoderResponse(responses, detail) {
 			case "neighborhood":
 				neighborhood = neighborhood || response.formatted_address;
 				break;
+			case "sublocality_level_4":
+			case "sublocality_level_3":
+				sublocality_l = sublocality_l || response.formatted_address;
+				break;
+			case "sublocality_level_2":
+			case "sublocality_level_1":
+				sublocality_h = sublocality_h || response.formatted_address;
+				break;
 			case "sublocality":
 				sublocality = sublocality || response.formatted_address;
-				sublocality_top = response.formatted_address;
 				break;
 			case "locality":
 				locality = locality || response.formatted_address;
@@ -449,9 +457,9 @@ function decodeGeocoderResponse(responses, detail) {
 				other = other || response.formatted_address;
 		}
 	}
-	var area = neighborhood || sublocality_top || locality;
-	var address = (detail && (street_address || neighborhood || sublocality)) || area || other;
-	var isJapan = /^日本(, (〒[\d-]+ )?)?/.exec(address);
+	var area = neighborhood || sublocality_h || sublocality || locality;
+	var address = (detail && (street_address || neighborhood || sublocality_l)) || area || other;
+	var isJapan = /^日本(, )?/.exec(address);
 	if (isJapan != null) {
 		address = address.substring(isJapan[0].length);
 		area = locality;
