@@ -46,10 +46,8 @@ window.addEventListener("load", function() {
 	bindLocalStorage("imakokoTwitFooter", "");
 }, false);
 
-function twitterOAuth() {
-	if(confirm("Twitterのページに移動します。\nユーザー名とパスワードを入力して\n「許可する」を押してください。")) {
-		location.href = "/twitter/oauth";
-	}
+function confirmOAuth() {
+	return confirm("Twitterのページに移動します。\nユーザー名とパスワードを入力して\n「許可する」を押してください。");
 }
 </script>
 </head>
@@ -90,7 +88,7 @@ function twitterOAuth() {
 </dd>
 <dt>Twitter</dt>
 <dd>
-<a href="javascript:twitterOAuth()">{{ account.twitter_user|default:"未登録"|escape }}</a>
+<a href="/twitter/oauth" onclick="return confirmOAuth();">{{ account.twitter_user|default:"未登録"|escape }}</a>
 </dd>
 </dl>
 
