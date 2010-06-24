@@ -436,6 +436,7 @@ function decodeGeocoderResponse(responses, detail) {
 			case "neighborhood":
 				neighborhood = neighborhood || response.formatted_address;
 				break;
+			case "sublocality_level_5":
 			case "sublocality_level_4":
 			case "sublocality_level_3":
 				sublocality_l = sublocality_l || response.formatted_address;
