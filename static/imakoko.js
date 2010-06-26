@@ -49,10 +49,10 @@ var geoLocator = {
 			navigator.geolocation.watchPosition(function(position) {
 				if (position.coords.accuracy < 300)
 					self.position = position;
-			});
+			}, null, {enableHighAccuracy:true});
 		};
 		try {
-			navigator.geolocation.getCurrentPosition(callback);
+			navigator.geolocation.getCurrentPosition(callback, null, {enableHighAccuracy:true});
 		} catch(e) {
 			alert("お使いのブラウザではご利用になれません。");
 		}
