@@ -32,7 +32,7 @@ var geoLocator = {
 
 			var iMap = imakokoMap;
 			var markerCallback;
-			if (self.shasai == "1")
+			if (false && self.shasai == "1")
 				markerCallback = self.createShasaiCallback();
 			else
 				markerCallback = self.createGeocodeCallback();
@@ -71,7 +71,7 @@ var geoLocator = {
 			renderer.setDirections(result);
 
 			var leg = result.routes[0].legs[0];
-			var remaining = 1284883200000 - new Date().getTime();
+			var remaining = 1284877800000 - new Date().getTime();
 			var infoDiv = document.createElement("div");
 			infoDiv.appendChild(document.createTextNode("第5回車載動画オフ"));
 			infoDiv.appendChild(document.createElement("br"));
