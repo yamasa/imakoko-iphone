@@ -37,7 +37,7 @@ window.addEventListener("load", function() {
 //	bindLocalStorage("imakokoShasaiRoute", "1");
 	bindLocalStorage("imakokoInterval", "20000");
 	bindLocalStorage("imakokoTermType", "0");
-	bindLocalStorage("imakokoSave", "1");
+	bindLocalStorage("imakokoStore", "0");
 	bindLocalStorage("imakokoTwitSkip", "19");
 	bindLocalStorage("imakokoTwitGeoLevel", "0");
 	bindLocalStorage("imakokoTwitLocation", "BOTH");
@@ -123,7 +123,7 @@ function confirmOAuth() {
 </dd>
 <dt>GPSデータ保存</dt>
 <dd>
-<select id="imakokoSave">
+<select id="imakokoStore">
 <option value="0">保存しない</option>
 <option value="1">保存する</option>
 </select>

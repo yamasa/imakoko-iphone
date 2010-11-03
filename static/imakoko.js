@@ -151,7 +151,7 @@ function timestampToIso(timestamp) {
 
 var imakoko = {
 	url : "/api/post",
-	save : localStorage.imakokoSave || "1",
+	save : localStorage.imakokoStore || "0",
 	termtype : localStorage.imakokoTermType || "0",
 	interval : Number(localStorage.imakokoInterval || 20000),
 
