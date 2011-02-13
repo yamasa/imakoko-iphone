@@ -71,7 +71,7 @@ var geoLocator = {
 			renderer.setDirections(result);
 
 			var leg = result.routes[0].legs[0];
-			var remaining = 1299299400000 - new Date().getTime();
+			var remaining = 1299301200000 - new Date().getTime();
 			var infoDiv = document.createElement("div");
 			infoDiv.appendChild(document.createTextNode("第6回車載動画オフ"));
 			infoDiv.appendChild(document.createElement("br"));
