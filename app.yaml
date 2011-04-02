@@ -24,11 +24,11 @@ handlers:
 
 - url: /
   static_files: index.html
-  upload: index.html
+  upload: index\.html
 
 - url: /m/.*
   static_files: usermap.html
-  upload: usermap.html
+  upload: usermap\.html
 
 - url: /static
   static_dir: static
@@ -39,13 +39,13 @@ handlers:
 
 - url: /favicon\.ico
   static_files: favicon.ico
-  upload: favicon.ico
+  upload: favicon\.ico
   mime_type: image/vnd.microsoft.icon
   expiration: "7d"
 
 - url: /robots\.txt
   static_files: robots.txt
-  upload: robots.txt
+  upload: robots\.txt
   expiration: "7d"
 
 - url: /.*
