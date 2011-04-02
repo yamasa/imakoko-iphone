@@ -84,11 +84,11 @@ function confirmOAuth() {
 <dl class="form">
 <dt>今ココなう！</dt>
 <dd>
-<a href="javascript:location.href='account.html'">{{ account.imakoko_user|default:"未登録"|escape }}</a>
+<a href="javascript:location.href='account.html'">{{ account.imakoko_user|default:"未登録" }}</a>
 </dd>
 <dt>Twitter</dt>
 <dd>
-<a href="/twitter/oauth" onclick="return confirmOAuth();">{{ account.twitter_user|default:"未登録"|escape }}</a>
+<a href="/twitter/oauth" onclick="return confirmOAuth();">{{ account.twitter_user|default:"未登録" }}</a>
 </dd>
 </dl>
 

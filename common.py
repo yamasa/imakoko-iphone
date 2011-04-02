@@ -6,6 +6,9 @@ from datetime import datetime, timedelta
 from random import getrandbits
 from os import urandom
 
+from google.appengine.dist import use_library
+use_library('django', '1.2')
+
 from google.appengine.ext import db, webapp
 from google.appengine.ext.webapp import template
 
