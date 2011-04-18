@@ -16,7 +16,6 @@ body > .toolbar {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	position: absolute;
-	z-index: 3;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -60,11 +59,13 @@ body > .toolbar {
 	border-image: url(/img/toolButton.png) 0 5 0 5;
 	-webkit-border-image: url(/img/toolButton.png) 0 5 0 5;
 	-moz-border-image: url(/img/toolButton.png) 0 5 0 5;
+	-o-border-image: url(/img/toolButton.png) 0 5 0 5;
 }
 .toolbar > a.blueButton {
 	border-image: url(/img/blueButton.png) 0 5 0 5;
 	-webkit-border-image: url(/img/blueButton.png) 0 5 0 5;
 	-moz-border-image: url(/img/blueButton.png) 0 5 0 5;
+	-o-border-image: url(/img/blueButton.png) 0 5 0 5;
 }
 .toolbar > a.leftButton {
 	left: 6px;
@@ -78,6 +79,7 @@ body > .toolbar {
 	border-image: url(/img/backButton.png) 0 8 0 14;
 	-webkit-border-image: url(/img/backButton.png) 0 8 0 14;
 	-moz-border-image: url(/img/backButton.png) 0 8 0 14;
+	-o-border-image: url(/img/backButton.png) 0 8 0 14;
 }
 body.landscape > .toolbar {
 	height: 32px;
