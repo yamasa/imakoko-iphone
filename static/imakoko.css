@@ -54,12 +54,10 @@ body.landscape.right > #imakoko_control {
 	color: #324f85;
 	background: #ffffff;
 	border: 1px solid #b4b4b4;
+	border-radius: 8px;
 	text-align: center;
 	overflow: hidden;
 	white-space: nowrap;
-	border-radius: 8px;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
 }
 body.landscape > #imakoko_control > a {
 	left: 0;

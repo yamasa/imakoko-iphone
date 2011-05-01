@@ -12,14 +12,11 @@ body.stripe {
 }
 
 body > .toolbar {
-	box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
-	height: 44px;
+	height: 43px;
 	background: url(/img/toolbar.png) #6d84a2 repeat-x left center;
 	border-bottom: 1px solid #2d3642;
 }
@@ -82,7 +79,7 @@ body > .toolbar {
 	-o-border-image: url(/img/backButton.png) 0 8 0 14;
 }
 body.landscape > .toolbar {
-	height: 32px;
+	height: 31px;
 }
 body.landscape > .toolbar > h1 {
 	top: 2px;
@@ -132,11 +129,9 @@ dl + h2, ul + h2 {
 dl.form {
 	background: #ffffff;
 	border: 1px solid #b4b4b4;
+	border-radius: 8px;
 	margin: 5px 0;
 	padding: 0;
-	border-radius: 8px;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
 }
 dl.form dt {
 	color: #606060;
@@ -182,19 +177,15 @@ dl.form dd select {
 	background: url(/img/listArrow.png) no-repeat right center;
 	width: 100%;
 	padding: 0 0 0 7px;
-	appearance: field;
 	-webkit-appearance: textfield;
-	-moz-appearance: textfield;
 }
 
 ul.text {
 	background: #ffffff;
 	border: 1px solid #b4b4b4;
+	border-radius: 8px;
 	margin: 5px 0;
 	padding: 0;
-	border-radius: 8px;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
 }
 ul.text li {
 	color: #606060;
