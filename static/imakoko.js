@@ -109,9 +109,9 @@ var geoLocator = {
 			else if (code == 403)
 				alert("重複投稿です。");
 			else if (code == 400)
-				alert("Twitterに投稿できません。\n設定画面で、アカウント情報を\n正しく入力してください。");
+				alert("Twitterに投稿できません。\n設定画面で、アカウント情報を正しく入力してください。");
 			else
-				alert("サーバーまたはネットワークの\nエラーです。しばらく待ってから\nリロードしてみてください。\n(ステータスコード=" + code + ")");
+				alert("サーバーまたはネットワークのエラーです。しばらく待ってからリロードしてみてください。\n(ステータスコード=" + code + ")");
 			imakokoMap.closeInfoWindow();
 		};
 		var infoDiv = document.createElement("div");
@@ -242,9 +242,9 @@ var imakoko = {
 				this.intervalId = setInterval(this.senderTask, this.interval);
 				this.changeButton(true);
 			} else if (code == 400) {
-				alert("今ココなう！に送信できません。\n設定画面で、アカウント情報を\n正しく入力してください。");
+				alert("今ココなう！に送信できません。\n設定画面で、アカウント情報を正しく入力してください。");
 			} else {
-				alert("サーバーまたはネットワークの\nエラーです。しばらく待ってから\nリロードしてみてください。\n(ステータスコード=" + code + ")");
+				alert("サーバーまたはネットワークのエラーです。しばらく待ってからリロードしてみてください。\n(ステータスコード=" + code + ")");
 			}
 		} else {
 			clearInterval(this.intervalId);
@@ -389,10 +389,10 @@ var twitter = {
 					twitter.intervalId = setInterval(twitter.autoTwitTask, twitter.interval);
 					twitter.changeButton(true);
 				} else if (code == 400) {
-					alert("Twitterに投稿できません。\n設定画面で、アカウント情報を\n正しく入力してください。");
+					alert("Twitterに投稿できません。\n設定画面で、アカウント情報を正しく入力してください。");
 					twitter.changeButton(false);
 				} else {
-					alert("サーバーまたはネットワークの\nエラーです。しばらく待ってから\nリロードしてみてください。\n(ステータスコード=" + code + ")");
+					alert("サーバーまたはネットワークのエラーです。しばらく待ってからリロードしてみてください。\n(ステータスコード=" + code + ")");
 					twitter.changeButton(false);
 				}
 			});
