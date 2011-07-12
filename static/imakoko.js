@@ -90,7 +90,7 @@ var geoLocator = {
 				origin : new google.maps.LatLng(coords.latitude, coords.longitude),
 				avoidHighways : noHighway,
 				avoidTolls : noHighway,
-				travelMode : google.maps.DirectionsTravelMode.DRIVING
+				travelMode : google.maps.TravelMode.DRIVING
 			}, callback);
 		};
 	},

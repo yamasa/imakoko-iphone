@@ -474,7 +474,7 @@ function decodeGeocoderResponse(responses, detail) {
 var googleGeocoder = new google.maps.Geocoder();
 
 function reverseGeocode(latLng, level, callback) {
-	googleGeocoder.geocode({ latLng : latLng, language : "ja" },
+	googleGeocoder.geocode({ location : latLng },
 		function(responses, status) {
 			var result = null;
 			if (status == google.maps.GeocoderStatus.OK) {
