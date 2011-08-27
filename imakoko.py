@@ -18,22 +18,46 @@ IMAKOKO_GETUSERINFO_URL = 'http://imakoko-gps.appspot.com/api/getuserinfo?user='
 IMAKOKO_USER_URL = 'https://imakoko-gps.appspot.com/user'
 IMAKOKO_POST_URL = 'http://imakoko-gps.appspot.com/api/post'
 
+LATEST_INTERVAL = timedelta(seconds=10)
+local_cache = (datetime.min, '')
 
 class ApiLatestPage(webapp.RequestHandler):
     def get(self):
-        cached = memcache.get('LATEST')
-        if cached:
+        global local_cache
+        now = datetime.utcnow()
+        if now < local_cache[0]:
             self.response.headers['Content-Type'] = 'text/javascript; charset=UTF-8'
-            self.response.out.write(cached)
+            self.response.out.write(local_cache[1])
             return
 
-        result = urlfetch.fetch(IMAKOKO_LATEST_URL)
-        if result.status_code == 200:
-            memcache.set('LATEST', result.content, 10)
-            self.response.headers['Content-Type'] = 'text/javascript; charset=UTF-8'
-            self.response.out.write(result.content)
+        mclient = memcache.Client()
+        lock_and_cache = mclient.get_multi(['LATEST_LOCK', 'LATEST_CACHE'], for_cas=True)
+        lock = lock_and_cache.get('LATEST_LOCK')
+        cache = lock_and_cache.get('LATEST_CACHE')
+        if lock is None:
+            next_timestamp = now + LATEST_INTERVAL
+            should_fetch = mclient.add('LATEST_LOCK', next_timestamp)
+        elif lock <= now:
+            next_timestamp = lock + LATEST_INTERVAL
+            if next_timestamp <= now:
+                next_timestamp = now + LATEST_INTERVAL
+            should_fetch = mclient.cas('LATEST_LOCK', next_timestamp)
         else:
-            self.response.set_status(result.status_code)
+            should_fetch = False
+
+        if should_fetch:
+            fetch_result = urlfetch.fetch(IMAKOKO_LATEST_URL)
+            if fetch_result.status_code == 200:
+                cache = (next_timestamp, fetch_result.content)
+                mclient.set('LATEST_CACHE', cache)
+        if cache is not None:
+            local_cache = cache
+
+        self.response.headers['Content-Type'] = 'text/javascript; charset=UTF-8'
+        if local_cache[0] < now - timedelta(seconds=50):
+            self.response.out.write('({"points":[],"result":1})')
+        else:
+            self.response.out.write(local_cache[1])
 
 
 class ApiGetuserinfoPage(webapp.RequestHandler):
