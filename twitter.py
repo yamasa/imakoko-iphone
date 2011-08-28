@@ -39,24 +39,24 @@ class TwitterOAuthPage(common.BasePage):
     def get(self):
         account = self.get_account()
         if account:
-            session_id = str(account.session_id)
+            sid_str = self.get_sid_str()
         else:
-            session_id = self.create_temporary_sid()
+            sid_str = self.create_temporary_sid()
         callback_url = self.request.relative_url('callback')
         reqtoken_result = oauth_client.obtain_request_token(callback_url)
-        memcache.set('TWITTER_OAUTH_' + session_id, reqtoken_result, 3600)
+        memcache.set('TWITTER_OAUTH_' + sid_str, reqtoken_result, 3600)
         self.redirect(reqtoken_result['authorization_url'])
 
 
 class TwitterCallbackPage(common.BasePage):
     def get(self):
-        session_id = str(self.request.cookies.get(u'IMAKOKO_SID'))
-        reqtoken_result = memcache.get('TWITTER_OAUTH_' + session_id)
+        sid_str = self.get_sid_str()
+        reqtoken_result = memcache.get('TWITTER_OAUTH_' + sid_str)
         if not reqtoken_result:
             logging.warning('No reqtoken_result.')
             self.show_error_page()
             return
-        memcache.delete('TWITTER_OAUTH_' + session_id)
+        memcache.delete('TWITTER_OAUTH_' + sid_str)
 
         account = self.get_account()
         if not account:

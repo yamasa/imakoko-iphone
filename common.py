@@ -23,41 +23,43 @@ class Account(db.Model):
     twitter_secret = db.StringProperty()
 
 class BasePage(webapp.RequestHandler):
+    def get_sid_str(self):
+        sid_str = self.request.cookies.get(u'IMAKOKO_SID')
+        return str(sid_str) if sid_str else ''
+
     def get_account(self):
-        session_id = self.request.cookies.get(u'IMAKOKO_SID')
-        if session_id:
-            return Account.all().filter('session_id =', session_id).get()
-        else:
+        sid_str = self.get_sid_str()
+        if not sid_str:
             return None
+        id_pair = sid_str.split('_', 1)
+        if len(id_pair) != 2 or not id_pair[0].isdigit():
+            return None
+        account = Account.get_by_id(long(id_pair[0]))
+        if account and account.session_id == id_pair[1]:
+            return account
+        return None
 
     def put_with_new_sid(self, account):
+        account.session_id = urandom(16).encode('hex')
         account.session_token = '%016x' % getrandbits(64)
         account.last_login = datetime.utcnow()
-        while True:
-            session_id = urandom(16).encode('hex')
-            account.session_id = session_id
-            account.put()
-            try:
-                if Account.all().filter('session_id =', session_id).count() == 1:
-                    break
-                logging.warning('(%d) Conflicted IMAKOKO_SID "%s".', account.key().id(), session_id)
-            except:
-                logging.exception('(%d) Check error: IMAKOKO_SID "%s".', account.key().id(), session_id)
+        account.put()
         self.set_sid_cookie(account)
 
     def set_sid_cookie(self, account):
+        sid_str = '%d_%s' % (account.key().id(), account.session_id)
         expires = account.last_login + timedelta(90)
         self.response.headers.add_header(
             'Set-Cookie',
-            'IMAKOKO_SID=' + str(account.session_id) + '; expires=' + expires.strftime('%a, %d-%b-%Y %H:%M:%S GMT') + '; path=/; httponly')
+            'IMAKOKO_SID=' + sid_str + '; expires=' + expires.strftime('%a, %d-%b-%Y %H:%M:%S GMT') + '; path=/; httponly')
 
     def create_temporary_sid(self):
-        session_id = 'x%031x' % getrandbits(124)
+        sid_str = '%032x' % getrandbits(128)
         expires = datetime.utcnow() + timedelta(hours=1)
         self.response.headers.add_header(
             'Set-Cookie',
-            'IMAKOKO_SID=' + session_id + '; expires=' + expires.strftime('%a, %d-%b-%Y %H:%M:%S GMT') + '; path=/; httponly')
-        return session_id
+            'IMAKOKO_SID=' + sid_str + '; expires=' + expires.strftime('%a, %d-%b-%Y %H:%M:%S GMT') + '; path=/; httponly')
+        return sid_str
 
     def show_html(self, html_file, template_values={}):
         self.response.headers['Content-Type'] = 'text/html; charset=UTF-8'

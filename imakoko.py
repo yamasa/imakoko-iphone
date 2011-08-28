@@ -108,16 +108,16 @@ class AccountPage(common.BasePage):
     def get(self):
         account = self.get_account()
         if account:
-            session_id = str(account.session_id)
+            sid_str = self.get_sid_str()
         else:
-            session_id = self.create_temporary_sid()
+            sid_str = self.create_temporary_sid()
         token = '%016x' % getrandbits(64)
-        memcache.set('ACCOUNT_' + session_id, token, 3600)
+        memcache.set('ACCOUNT_' + sid_str, token, 3600)
         self.show_html('account.html', {'user': account and account.imakoko_user, 'token': token})
 
     def post(self):
-        session_id = str(self.request.cookies.get(u'IMAKOKO_SID'))
-        token = memcache.get('ACCOUNT_' + session_id)
+        sid_str = self.get_sid_str()
+        token = memcache.get('ACCOUNT_' + sid_str)
         if not token or token != self.request.get('token'):
             logging.warning('Token mismatch.')
             self.show_error_page()
@@ -136,7 +136,7 @@ class AccountPage(common.BasePage):
                 self.show_error_page()
                 return
 
-        memcache.delete('ACCOUNT_' + session_id)
+        memcache.delete('ACCOUNT_' + sid_str)
 
         account = self.get_account()
         if not account:
@@ -152,29 +152,29 @@ class AccountPage(common.BasePage):
             account.imakoko_user = None
             account.imakoko_secret = None
             account.put()
-            memcache.delete('IMAKOKO_' + account.session_id + account.session_token)
+            memcache.delete('IMAKOKO_' + sid_str + account.session_token)
         self.redirect('/settings.html')
 
 
 class ApiPostPage(common.BasePage):
     def post(self):
-        session_id = str(self.request.cookies.get(u'IMAKOKO_SID'))
-        session_token = str(self.request.headers.get('X-Imakoko-Token'))
+        sid_str = self.get_sid_str()
+        token = str(self.request.headers.get('X-Imakoko-Token'))
 
-        auth_str = memcache.get('IMAKOKO_' + session_id + session_token)
+        auth_str = memcache.get('IMAKOKO_' + sid_str + token)
         if not auth_str:
             account = self.get_account()
             if not account or not account.imakoko_user:
                 logging.debug('Not Logged in.')
                 self.error(400)
                 return
-            if account.session_token != session_token:
+            if account.session_token != token:
                 logging.warning('(%d) session_token mismatch.', account.key().id())
                 self.error(500)
                 return
             logging.debug('(%d) Imakoko: %s', account.key().id(), account.imakoko_user)
             auth_str = 'Basic ' + str(account.imakoko_secret)
-            memcache.set('IMAKOKO_' + session_id + session_token, auth_str, 3600)
+            memcache.set('IMAKOKO_' + sid_str + token, auth_str, 3600)
 
         data = self.request.body
         headers = {'Authorization': auth_str}
@@ -182,7 +182,7 @@ class ApiPostPage(common.BasePage):
 
         status_code = result.status_code
         if status_code == 401:
-            memcache.delete('IMAKOKO_' + session_id + session_token)
+            memcache.delete('IMAKOKO_' + sid_str + token)
             self.error(400)
             return
 
