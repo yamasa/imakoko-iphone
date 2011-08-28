@@ -21,6 +21,7 @@ var geoLocator = {
 	position : null,
 	shasai : localStorage.imakokoShasai || "0",
 	shasaiRoute : localStorage.imakokoShasaiRoute || "1",
+	shasaiTosu : localStorage.imakokoShasaiTosu || "0",
 
 	init : function() {
 		this.imakokoUser = document.getElementById("imakoko_user").value;
@@ -62,6 +63,7 @@ var geoLocator = {
 		var directions = new google.maps.DirectionsService();
 		var renderer;
 		var noHighway = (this.shasaiRoute == "0");
+		var waypoints = (this.shasaiTosu == "0") ? [] : [ { location : new google.maps.LatLng(33.395317, 130.537791), stopover : false } ];
 
 		var callback = function(result, status) {
 			if (status != google.maps.DirectionsStatus.OK) return;
@@ -90,6 +92,7 @@ var geoLocator = {
 				origin : new google.maps.LatLng(coords.latitude, coords.longitude),
 				avoidHighways : noHighway,
 				avoidTolls : noHighway,
+				waypoints : waypoints,
 				travelMode : google.maps.TravelMode.DRIVING
 			}, callback);
 		};

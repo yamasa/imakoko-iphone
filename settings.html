@@ -35,6 +35,7 @@ function bindLocalStorage(name, defaultValue) {
 window.addEventListener("load", function() {
 	bindLocalStorage("imakokoShasai", "0");
 	bindLocalStorage("imakokoShasaiRoute", "1");
+	bindLocalStorage("imakokoShasaiTosu", "0");
 	bindLocalStorage("imakokoInterval", "20000");
 	bindLocalStorage("imakokoTermType", "0");
 	bindLocalStorage("imakokoStore", "0");
@@ -73,6 +74,13 @@ function confirmOAuth() {
 <select id="imakokoShasaiRoute">
 <option value="0">利用しない</option>
 <option value="1">利用する</option>
+</select>
+</dd>
+<dt>鳥栖ターン</dt>
+<dd>
+<select id="imakokoShasaiTosu">
+<option value="0">鳥栖ターンしない</option>
+<option value="1">鳥栖ターンする</option>
 </select>
 </dd>
 </dl>
