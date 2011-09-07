@@ -50,14 +50,16 @@ class ApiLatestPage(webapp.RequestHandler):
             if fetch_result.status_code == 200:
                 cache = (next_timestamp, fetch_result.content)
                 mclient.set('LATEST_CACHE', cache)
-        if cache is not None:
-            local_cache = cache
 
+        if cache is not None and local_cache[0] < cache[0]:
+            local_cache = cache
+        else:
+            cache = local_cache
         self.response.headers['Content-Type'] = 'text/javascript; charset=UTF-8'
-        if local_cache[0] < now - timedelta(seconds=50):
+        if cache[0] < now - timedelta(seconds=50):
             self.response.out.write('({"points":[],"result":1})')
         else:
-            self.response.out.write(local_cache[1])
+            self.response.out.write(cache[1])
 
 
 class ApiGetuserinfoPage(webapp.RequestHandler):
