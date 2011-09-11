@@ -56,7 +56,7 @@ class ApiLatestPage(webapp.RequestHandler):
         else:
             cache = local_cache
         self.response.headers['Content-Type'] = 'text/javascript; charset=UTF-8'
-        if cache[0] < now - timedelta(seconds=50):
+        if cache[0] < now - timedelta(minutes=5):
             self.response.out.write('({"points":[],"result":1})')
         else:
             self.response.out.write(cache[1])
