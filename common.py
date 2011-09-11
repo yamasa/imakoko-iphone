@@ -13,14 +13,14 @@ from google.appengine.ext import db, webapp
 from google.appengine.ext.webapp import template
 
 class Account(db.Model):
-    session_id = db.StringProperty()
-    session_token = db.StringProperty()
+    session_id = db.StringProperty(indexed=False)
+    session_token = db.StringProperty(indexed=False)
     last_login = db.DateTimeProperty()
-    imakoko_user = db.StringProperty()
-    imakoko_secret = db.StringProperty()
-    twitter_user = db.StringProperty()
-    twitter_token = db.StringProperty()
-    twitter_secret = db.StringProperty()
+    imakoko_user = db.StringProperty(indexed=False)
+    imakoko_secret = db.StringProperty(indexed=False)
+    twitter_user = db.StringProperty(indexed=False)
+    twitter_token = db.StringProperty(indexed=False)
+    twitter_secret = db.StringProperty(indexed=False)
 
 class BasePage(webapp.RequestHandler):
     def get_sid_str(self):
