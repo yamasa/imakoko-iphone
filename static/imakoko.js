@@ -154,7 +154,6 @@ function timestampToIso(timestamp) {
 
 var imakoko = {
 	url : "/api/post",
-	save : localStorage.imakokoStore || "0",
 	termtype : localStorage.imakokoTermType || "0",
 	interval : Number(localStorage.imakokoInterval || 20000),
 
@@ -198,7 +197,7 @@ var imakoko = {
 		if (coords.altitude != null) text += "&gpsh=" + coords.altitude.toFixed();
 		if (coords.heading != null) text += "&gpsd=" + coords.heading.toFixed();
 		if (coords.speed != null) text += "&gpsv=" + (coords.speed * 3.6).toFixed();
-		text += "&save=" + this.save + "&t=" + this.termtype;
+		text += "&save=0&t=" + this.termtype;
 		this.postingTimestamp = now || timestamp;
 		try {
 			this.xmlhttp.open("POST", this.url, async);

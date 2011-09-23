@@ -38,7 +38,6 @@ window.addEventListener("load", function() {
 	bindLocalStorage("imakokoShasaiTosu", "0");
 	bindLocalStorage("imakokoInterval", "20000");
 	bindLocalStorage("imakokoTermType", "0");
-	bindLocalStorage("imakokoStore", "0");
 	bindLocalStorage("imakokoTwitSkip", "19");
 	bindLocalStorage("imakokoTwitGeoLevel", "0");
 	bindLocalStorage("imakokoTwitLocation", "BOTH");
@@ -125,13 +124,6 @@ function confirmOAuth() {
 <option value="9">ヘリコプター</option>
 <option value="10">船</option>
 <option value="99">Twitterアイコン</option>
-</select>
-</dd>
-<dt>GPSデータ保存</dt>
-<dd>
-<select id="imakokoStore">
-<option value="0">保存しない</option>
-<option value="1">保存する</option>
 </select>
 </dd>
 </dl>
