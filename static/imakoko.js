@@ -73,7 +73,7 @@ var geoLocator = {
 			renderer.setDirections(result);
 
 			var leg = result.routes[0].legs[0];
-			var remaining = 1318644000000 - new Date().getTime();
+			var remaining = 1318638600000 - new Date().getTime();
 			var infoDiv = document.createElement("div");
 			infoDiv.appendChild(document.createTextNode("第7回 車載オフ"));
 			infoDiv.appendChild(document.createElement("br"));
