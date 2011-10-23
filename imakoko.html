@@ -21,8 +21,8 @@
 <div id="imakoko_control">
 <a href="javascript:imakoko.startStop()" id="autoimkk">自動送信開始</a>
 <a href="javascript:twitter.startStop()" id="autotwit">自動twit開始</a>
-<input id="imakoko_user" type="hidden" value="{{ account.imakoko_user|default:"" }}">
-<input id="session_token" type="hidden" value="{{ account.session_token|default:"" }}">
+<input id="imakoko_user" type="hidden" value="{{ account.imakoko_user|d('',true) }}">
+<input id="session_token" type="hidden" value="{{ account.session_token }}">
 </div>
 
 <div id="map_canvas"></div>

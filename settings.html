@@ -33,11 +33,11 @@ function bindLocalStorage(name, defaultValue) {
 }
 
 window.addEventListener("load", function() {
-{% comment %}
+{#
 	bindLocalStorage("imakokoShasai", "0");
 	bindLocalStorage("imakokoShasaiRoute", "1");
 	bindLocalStorage("imakokoShasaiTosu", "0");
-{% endcomment %}
+#}
 	bindLocalStorage("imakokoInterval", "20000");
 	bindLocalStorage("imakokoTermType", "0");
 	bindLocalStorage("imakokoTwitSkip", "19");
@@ -61,7 +61,7 @@ function confirmOAuth() {
 </div>
 
 <div class="panel">
-{% comment %}
+{#
 <h2>第7回 車載オフ in 神奈川県</h2>
 <dl class="form">
 <dt>集合場所へのルート表示</dt>
@@ -89,17 +89,17 @@ function confirmOAuth() {
 <p>
 車載動画オフについては<a href="http://goo.gl/VAopo" target="_blank">こちら</a>
 </p>
-{% endcomment %}
+#}
 
 <h2>アカウント情報</h2>
 <dl class="form">
 <dt>今ココなう！</dt>
 <dd>
-<a href="javascript:location.href='account.html'">{{ account.imakoko_user|default:"未登録" }}</a>
+<a href="javascript:location.href='account.html'">{{ account.imakoko_user|d('未登録',true) }}</a>
 </dd>
 <dt>Twitter</dt>
 <dd>
-<a href="/twitter/oauth" onclick="return confirmOAuth();">{{ account.twitter_user|default:"未登録" }}</a>
+<a href="/twitter/oauth" onclick="return confirmOAuth();">{{ account.twitter_user|d('未登録',true) }}</a>
 </dd>
 </dl>
 

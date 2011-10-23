@@ -27,14 +27,14 @@ function doSubmit() {
 
 <div class="panel">
 <h2>今ココなう！ アカウント情報</h2>
-{% if error %}
+{% if error -%}
 <p>ユーザーIDまたはパスワードが正しくありません。</p>
-{% endif %}
+{% endif -%}
 <form method="POST" action="account.html" onsubmit="return checkFlag()">
 <dl class="form">
 <dt>ユーザーID</dt>
 <dd>
-<input name="user" type="text" value="{{ user|default:"" }}">
+<input name="user" type="text" value="{{ user|d('',true) }}">
 </dd>
 <dt>パスワード</dt>
 <dd>
