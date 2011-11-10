@@ -18,13 +18,16 @@ CONSUMER_SECRET = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 # bit.ly API Key.
 BITLY_USERNAME = 'XXXXX'
 BITLY_APIKEY = 'R_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+# User-map's hostname.
+#USER_MAP_HOSTNAME = app_identity.get_default_version_hostname()
+USER_MAP_HOSTNAME = 'imakoko-iphone.appspot.com'
 
 
 TWITTER_POST_URL = 'http://api.twitter.com/1/statuses/update.json'
 
 oauth_client = TwitterClient(CONSUMER_KEY, CONSUMER_SECRET)
 
-shorten_url_pattern = re.compile(re.escape('http://' + app_identity.get_default_version_hostname() + '/m/') + '[\w!%\'()*.~-]*(#\w+)?')
+shorten_url_pattern = re.compile(re.escape('http://' + USER_MAP_HOSTNAME + '/m/') + '[\w!%\'()*.~-]*(#\w+)?')
 
 def shorten_url(matchobj):
     url = matchobj.group()

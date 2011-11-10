@@ -262,6 +262,7 @@ var imakoko = {
 
 var twitter = {
 	url : "/twitter/twit",
+	mapHost : "imakoko-iphone.appspot.com" /* location.host */,
 	twitHeader : localStorage.imakokoTwitHeader || "ｲﾏｺｺ! L:",
 	twitFooter : localStorage.imakokoTwitFooter || "",
 	geocodeLevel : localStorage.imakokoTwitGeoLevel || "0",
@@ -309,7 +310,7 @@ var twitter = {
 	doTwit : function(async, address, latLng, area) {
 		var footer = this.twitFooter ? (" " + this.twitFooter) : "";
 		if (footer.indexOf("%map%") >= 0) {
-			var mapUrl = "http://" + location.host + "/m/" + encodeURIComponent(geoLocator.imakokoUser) + "#" + encodeGeohash(latLng.lat(), latLng.lng());
+			var mapUrl = "http://" + this.mapHost + "/m/" + encodeURIComponent(geoLocator.imakokoUser) + "#" + encodeGeohash(latLng.lat(), latLng.lng());
 			footer = footer.replace("%map%", mapUrl);
 		}
 		if (this.addHashtag == "BOTH") {
