@@ -1,25 +1,26 @@
 application: imakoko-iphone
 version: 1
-runtime: python
+runtime: python27
 api_version: 1
+threadsafe: true
 
 handlers:
 - url: /api/.*
-  script: imakoko.py
+  script: imakoko.app
 
 - url: /account\.html
-  script: imakoko.py
+  script: imakoko.app
   secure: always
 
 - url: /[^/]+\.html
-  script: imakoko.py
+  script: imakoko.app
   secure: never
 
 - url: /twitter/.*
-  script: twitter.py
+  script: twitter.app
 
 - url: /cron/.*
-  script: cron.py
+  script: cron.app
   login: admin
 
 - url: /
@@ -49,4 +50,8 @@ handlers:
   expiration: "7d"
 
 - url: /.*
-  script: notfound.py
+  script: notfound.app
+
+libraries:
+- name: jinja2
+  version: latest

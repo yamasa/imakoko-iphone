@@ -7,11 +7,10 @@ from datetime import datetime, timedelta
 from random import getrandbits
 from urllib import quote
 
+import webapp2
 import common
 
 from google.appengine.api import memcache, urlfetch
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp.util import run_wsgi_app
 
 IMAKOKO_LATEST_URL = 'http://imakoko-gps.appspot.com/api/latest?user=all'
 IMAKOKO_GETUSERINFO_URL = 'http://imakoko-gps.appspot.com/api/getuserinfo?user='
@@ -21,7 +20,7 @@ IMAKOKO_POST_URL = 'http://imakoko-gps.appspot.com/api/post'
 LATEST_INTERVAL = timedelta(seconds=10)
 local_cache = (datetime.min, '')
 
-class ApiLatestPage(webapp.RequestHandler):
+class ApiLatestPage(webapp2.RequestHandler):
     def get(self):
         global local_cache
         now = datetime.utcnow()
@@ -62,7 +61,7 @@ class ApiLatestPage(webapp.RequestHandler):
             self.response.out.write(cache[1])
 
 
-class ApiGetuserinfoPage(webapp.RequestHandler):
+class ApiGetuserinfoPage(webapp2.RequestHandler):
     def get(self):
         user = str(self.request.get('user'))
         if not user:
@@ -195,16 +194,10 @@ class ApiPostPage(common.BasePage):
 #        self.response.out.write(result.content)
 
 
-application = webapp.WSGIApplication(
+app = webapp2.WSGIApplication(
     [('/api/latest', ApiLatestPage),
      ('/api/getuserinfo', ApiGetuserinfoPage),
      ('/imakoko.html', MainPage),
      ('/settings.html', SettingPage),
      ('/account.html', AccountPage),
      ('/api/post', ApiPostPage)])
-
-def main():
-    run_wsgi_app(application)
-
-if __name__ == '__main__':
-    main()

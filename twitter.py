@@ -5,12 +5,11 @@ import logging
 import cgi
 import re
 
+import webapp2
 import common
 from oauthclient import TwitterClient, escape
 
 from google.appengine.api import app_identity, memcache, urlfetch
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp.util import run_wsgi_app
 
 # Twitter OAuth Consumer Key.
 CONSUMER_KEY = 'XXXXXXXXXXXXXXXXXXXXX'
@@ -119,13 +118,7 @@ class TwitProxyPage(common.BasePage):
 #        self.response.out.write(result.content)
 
 
-application = webapp.WSGIApplication(
+app = webapp2.WSGIApplication(
     [('/twitter/oauth', TwitterOAuthPage),
      ('/twitter/callback', TwitterCallbackPage),
      ('/twitter/twit', TwitProxyPage)])
-
-def main():
-    run_wsgi_app(application)
-
-if __name__ == '__main__':
-    main()
