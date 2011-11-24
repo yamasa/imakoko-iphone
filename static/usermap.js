@@ -200,6 +200,7 @@ window.onload = function() {
 		while (userList.hasChildNodes()) {
 			userList.removeChild(userList.lastChild);
 		}
+		userList.className = "userliststart";
 		var mainUserIndex = -1;
 		for (var i = 0; i < latest.length; i++) {
 			var li = document.createElement("li");
@@ -210,22 +211,29 @@ window.onload = function() {
 				};
 			})();
 			li.appendChild(document.createTextNode(latest[i].nickname));
+			var liClass = "";
+			if (mainUserIndex >= 0) {
+				liClass = "bottom ";
+			} else if (latest[i].user == mainUser) {
+				mainUserIndex = i;
+				liClass = "both ";
+			}
 			if (latest[i].ustream_status) {
 				if (latest[i].ustream_status == "live")
-					li.className = "ustream";
+					liClass += "ustream";
 				else if (latest[i].ustream_status == "justin.tv")
-					li.className = "justin";
+					liClass += "justin";
 				else if (latest[i].ustream_status.match(/^nicolive/))
-					li.className = "nicolive";
+					liClass += "nicolive";
 			}
+			li.className = liClass;
 			userList.appendChild(li);
-			if (latest[i].user == mainUser)
-				mainUserIndex = i;
 		}
-		if (mainUserIndex >= 0)
-			setTimeout(function() {
-				scrollTo(0, mainUserIndex * 37 + 25);
-			}, 0);
+		setTimeout(function() {
+			userList.className = "";
+			if (mainUserIndex >= 0)
+				scrollTo(0, Math.max(mainUserIndex * 37 - 153, 0));
+		}, 0);
 	};
 	initMarkerCallback();
 

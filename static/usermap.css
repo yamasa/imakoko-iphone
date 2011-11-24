@@ -27,13 +27,30 @@ body.landscape > #map_canvas {
 	padding: 0 16px 0 10px;
 	height: 36px;
 	line-height: 36px;
-	border-bottom: 1px solid #e0e0e0;
+	border-top: 1px solid #e0e0e0;
 	background: url(/img/listArrow.png) no-repeat right center;
 	font-weight: bold;
 	font-size: 20px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	transition: opacity 1s;
+	-webkit-transition: opacity 1s;
+	-moz-transition: opacity 1s;
+	-o-transition: opacity 1s;
+}
+#user_list > li:first-child {
+	border-top: 0;
+}
+#user_list > li:last-child {
+	border-bottom: 1px solid #e0e0e0;
+}
+#user_list > li.both {
+	border-bottom: 1px solid #e0e0e0;
+}
+#user_list > li.bottom {
+	border-top: 0;
+	border-bottom: 1px solid #e0e0e0;
 }
 #user_list > li.ustream:after {
 	content: url(/img/ustream.png)
@@ -43,6 +60,12 @@ body.landscape > #map_canvas {
 }
 #user_list > li.nicolive:after {
 	content: url(/img/nicolive.png)
+}
+.userliststart > li {
+	opacity: 0;
+}
+.userliststart > li.both {
+	opacity: 1;
 }
 .userwindow > a {
 	color: #000000;
