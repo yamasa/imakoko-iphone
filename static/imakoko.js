@@ -15,6 +15,7 @@ function millisecToStr(millisec) {
 		return minute + "分";
 }
 
+var toggleTraffic = function(){};
 var geoLocator = {
 	imakokoUser : "",
 	sessionToken : "",
@@ -39,6 +40,18 @@ var geoLocator = {
 				markerCallback = self.createGeocodeCallback();
 
 			iMap.initGpsMode(position.coords, self.imakokoUser, imakoko.termtype, markerCallback);
+			var trafficLayer = new google.maps.TrafficLayer();
+			var trafficButton = document.getElementById("traffic_button");
+			trafficLayer.setMap(iMap.googleMap);
+			toggleTraffic = function() {
+				if (trafficLayer.getMap() != null) {
+					trafficLayer.setMap(null);
+					trafficButton.className = "darkButton";
+				} else {
+					trafficLayer.setMap(iMap.googleMap);
+					trafficButton.className = "";
+				}
+			};
 
 			if (false && self.shasai == "1")
 				setTimeout(markerCallback, 5000);

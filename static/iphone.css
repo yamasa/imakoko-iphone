@@ -64,6 +64,12 @@ body > .toolbar {
 	-moz-border-image: url(/img/blueButton.png) 0 5 0 5;
 	-o-border-image: url(/img/blueButton.png) 0 5 0 5;
 }
+.toolbar > a.darkButton {
+	border-image: url(/img/darkButton.png) 0 5 0 5;
+	-webkit-border-image: url(/img/darkButton.png) 0 5 0 5;
+	-moz-border-image: url(/img/darkButton.png) 0 5 0 5;
+	-o-border-image: url(/img/darkButton.png) 0 5 0 5;
+}
 .toolbar > a.leftButton {
 	left: 6px;
 	right: auto;

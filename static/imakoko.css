@@ -85,3 +85,7 @@ body.landscape > #imakoko_control > #autotwit {
 #autotwit.running {
 	background: #20ad14;
 }
+#traffic_button {
+	left: 54px;
+	right: auto;
+}
