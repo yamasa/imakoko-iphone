@@ -127,7 +127,11 @@ window.onload = function() {
 		pageTitle.removeChild(pageTitle.lastChild);
 		pageTitle.appendChild(document.createTextNode(text));
 	};
+	var sortingOrigin = new google.maps.LatLng(35.658634, 139.745411);
 	var toUserListMode = function() {
+		if (imakokoMap.googleMap)
+			sortingOrigin = imakokoMap.googleMap.getCenter();
+
 		listButton.style.display = "none";
 		mapCanvas.style.display = "none";
 
@@ -201,13 +205,23 @@ window.onload = function() {
 			userList.removeChild(userList.lastChild);
 		}
 		userList.className = "userliststart";
+
+		for (var i = 0; i < latest.length; i++) {
+			var data = latest[i];
+			var latLng = new google.maps.LatLng(Number(data.lat), Number(data.lon));
+			var distance = google.maps.geometry.spherical.computeDistanceBetween(latLng, sortingOrigin);
+			data.latLng = latLng;
+			data.distance = (latLng.lat() > sortingOrigin.lat()) ? -distance : distance;
+		}
+		latest.sort(function(a, b){ return a.distance - b.distance; });
+
 		var mainUserIndex = -1;
 		for (var i = 0; i < latest.length; i++) {
 			var li = document.createElement("li");
 			li.onclick = (function() {
 				var data = latest[i];
 				return function() {
-					userListSelected(data.user, data.nickname, new google.maps.LatLng(Number(data.lat), Number(data.lon)));
+					userListSelected(data.user, data.nickname, data.latLng);
 				};
 			})();
 			li.appendChild(document.createTextNode(latest[i].nickname));
