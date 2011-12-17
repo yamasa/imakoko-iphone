@@ -27,8 +27,7 @@ class Account(db.Model):
 
 class BasePage(webapp2.RequestHandler):
     def get_sid_str(self):
-        sid_str = self.request.cookies.get(u'IMAKOKO_SID')
-        return str(sid_str) if sid_str else ''
+        return self.request.cookies.get('IMAKOKO_SID', '')
 
     def get_account(self):
         sid_str = self.get_sid_str()
@@ -54,14 +53,14 @@ class BasePage(webapp2.RequestHandler):
         self.response.set_cookie('IMAKOKO_SID', sid_str, max_age=timedelta(90), httponly=True)
 
     def create_temporary_sid(self):
-        sid_str = '%032x' % getrandbits(128)
+        sid_str = '_%032x' % getrandbits(128)
         self.response.set_cookie('IMAKOKO_SID', sid_str, max_age=timedelta(hours=1), httponly=True)
         return sid_str
 
     def show_html(self, html_file, template_values={}):
         template = jinja_environment.get_template(html_file)
         self.response.headers['Content-Type'] = 'text/html; charset=UTF-8'
-        self.response.out.write(template.render(template_values))
+        self.response.write(template.render(template_values))
 
     def show_error_page(self):
         self.error(500)

@@ -111,11 +111,7 @@ class TwitProxyPage(common.BasePage):
             self.error(400)
             return
 
-        self.response.set_status(status_code)
-#        content_type = result.headers.get('Content-Type')
-#        if content_type:
-#            self.response.headers['Content-Type'] = content_type
-#        self.response.out.write(result.content)
+        self.response.status_int = status_code
 
 
 app = webapp2.WSGIApplication(

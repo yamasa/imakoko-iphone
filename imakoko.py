@@ -26,7 +26,7 @@ class ApiLatestPage(webapp2.RequestHandler):
         now = datetime.utcnow()
         if now < local_cache[0]:
             self.response.headers['Content-Type'] = 'text/javascript; charset=UTF-8'
-            self.response.out.write(local_cache[1])
+            self.response.write(local_cache[1])
             return
 
         mclient = memcache.Client()
@@ -56,30 +56,30 @@ class ApiLatestPage(webapp2.RequestHandler):
             cache = local_cache
         self.response.headers['Content-Type'] = 'text/javascript; charset=UTF-8'
         if cache[0] < now - timedelta(minutes=5):
-            self.response.out.write('({"points":[],"result":1})')
+            self.response.write('({"points":[],"result":1})')
         else:
-            self.response.out.write(cache[1])
+            self.response.write(cache[1])
 
 
 class ApiGetuserinfoPage(webapp2.RequestHandler):
     def get(self):
-        user = str(self.request.get('user'))
+        user = self.request.get('user')
         if not user:
             self.error(400)
             return
         cached = memcache.get('USERINFO_' + user)
         if cached:
             self.response.headers['Content-Type'] = 'text/javascript; charset=UTF-8'
-            self.response.out.write(cached)
+            self.response.write(cached)
             return
 
         result = urlfetch.fetch(IMAKOKO_GETUSERINFO_URL + quote(user, safe='~'))
         if result.status_code == 200:
             memcache.set('USERINFO_' + user, result.content, 300)
             self.response.headers['Content-Type'] = 'text/javascript; charset=UTF-8'
-            self.response.out.write(result.content)
+            self.response.write(result.content)
         else:
-            self.response.set_status(result.status_code)
+            self.response.status_int = result.status_code
 
 
 class MainPage(common.BasePage):
@@ -160,7 +160,7 @@ class AccountPage(common.BasePage):
 class ApiPostPage(common.BasePage):
     def post(self):
         sid_str = self.get_sid_str()
-        token = str(self.request.headers.get('X-Imakoko-Token'))
+        token = self.request.headers.get('X-Imakoko-Token')
 
         auth_str = memcache.get('IMAKOKO_' + sid_str + token)
         if not auth_str:
@@ -174,7 +174,7 @@ class ApiPostPage(common.BasePage):
                 self.error(500)
                 return
             logging.debug('(%d) Imakoko: %s', account.key().id(), account.imakoko_user)
-            auth_str = 'Basic ' + str(account.imakoko_secret)
+            auth_str = 'Basic ' + account.imakoko_secret
             memcache.set('IMAKOKO_' + sid_str + token, auth_str, 3600)
 
         data = self.request.body
@@ -187,11 +187,7 @@ class ApiPostPage(common.BasePage):
             self.error(400)
             return
 
-        self.response.set_status(status_code)
-#        content_type = result.headers.get('Content-Type')
-#        if content_type:
-#            self.response.headers['Content-Type'] = content_type
-#        self.response.out.write(result.content)
+        self.response.status_int = status_code
 
 
 app = webapp2.WSGIApplication(
