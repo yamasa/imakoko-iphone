@@ -4,10 +4,16 @@
   「今ココなう！」やTwitterへの投稿を行なったりする、
   Google App Engine上で動作するWebアプリケーションです。
 
-  twitter.py の頭のほうにある "Twitter OAuth Consumer Key" と
+  imakoko.html と usermap.html の後ろのほうにある
+  "http://maps.googleapis.com/maps/api/js?key=XXXXXXXX&..." の XXXXXXXX の
+  部分と、twitter.py の頭のほうにある "Twitter OAuth Consumer Key" と
   "bit.ly API Key" を書き換え、app.yaml の先頭行の application 名を
-  変更して Google App Engine にデプロイすることで
-  実行させることができます。
+  変更して Google App Engine にデプロイすることで実行させることができます。
+
+  最初の Google Maps API v3 のキーは、以下のページの手順で取得できます。
+    http://code.google.com/intl/en/apis/maps/documentation/javascript/tutorial.html#Obtaining_Key
+  Twitter と bit.ly のAPIキーの入手方法や、Google App Engine への
+  デプロイ方法は適当に検索すればすぐ見つかります。
 
 
 ライセンス
@@ -21,8 +27,8 @@
     pinstripes.png
     toolButton.png
     toolbar.png
-  が iUI(http://code.google.com/p/iui/) のものを、それ以外は
-  今ココなう！Proxy(http://www.fujita-lab.com/imakoko/download.html) の
+  が iUI (http://code.google.com/p/iui/) のものを、それ以外は
+  今ココなう！Proxy (http://www.fujita-lab.com/imakoko/download.html) の
   ものを加工して使用しています。そのため、これらのファイルについては
   iUIや今ココなう！Proxyのライセンスに準拠します。
 
@@ -30,4 +36,4 @@
 謝辞
 
   「今ココなう！」という素晴らしいサービスを提供していただいている
-  ふじたろんさん(http://twitter.com/fujitalon)に深く感謝いたします。
+  ふじたろんさん (http://twitter.com/fujitalon) に深く感謝いたします。
