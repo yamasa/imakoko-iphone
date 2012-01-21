@@ -378,8 +378,8 @@ var imakokoMap = {
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				var res = eval(this.responseText);
-				if (res && res.result) {
+				var res = JSON.parse(this.responseText.slice(1, -1));
+				if (res.result) {
 					self.latestAll = res.points;
 					self.refresh();
 				}
