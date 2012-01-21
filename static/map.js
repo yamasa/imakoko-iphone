@@ -80,7 +80,7 @@ var ImakokoMarker = function(map, latLng, user, nickname, type, dir, live, oncli
 };
 ImakokoMarker.prototype = {
 	getIcon : function(dir) {
-		if (!this.arrow || dir == null)
+		if (!this.arrow || dir == null || isNaN(dir))
 			return this.icon;
 		dir = Number(dir);
 		dir %= 360;

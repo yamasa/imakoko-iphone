@@ -208,7 +208,7 @@ var imakoko = {
 		var text = "time=" + encodeURIComponent(timestampToIso(timestamp))
 					+ "&lat=" + coords.latitude.toFixed(6) + "&lon=" + coords.longitude.toFixed(6);
 		if (coords.altitude != null) text += "&gpsh=" + coords.altitude.toFixed();
-		if (coords.heading != null) text += "&gpsd=" + coords.heading.toFixed();
+		if (coords.heading != null && !isNaN(coords.heading)) text += "&gpsd=" + coords.heading.toFixed();
 		if (coords.speed != null) text += "&gpsv=" + (coords.speed * 3.6).toFixed();
 		text += "&save=0&t=" + this.termtype;
 		this.postingTimestamp = now || timestamp;
