@@ -167,7 +167,7 @@ var locTracer = {
 		if (this.cur >= this.max) this.cur = 0;
 	},
 	clear : function() {
-		for (i in this.marks) this.marks[i].setMap(null);
+		for (var i in this.marks) this.marks[i].setMap(null);
 		this.marks = [];
 		this.cur = 0;
 		this.prev = null;
