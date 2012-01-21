@@ -33,11 +33,9 @@ function bindLocalStorage(name, defaultValue) {
 }
 
 window.addEventListener("load", function() {
-{#
 	bindLocalStorage("imakokoShasai", "0");
 	bindLocalStorage("imakokoShasaiRoute", "1");
 	bindLocalStorage("imakokoShasaiTosu", "0");
-#}
 	bindLocalStorage("imakokoInterval", "20000");
 	bindLocalStorage("imakokoTermType", "0");
 	bindLocalStorage("imakokoTwitSkip", "19");
@@ -61,17 +59,16 @@ function confirmOAuth() {
 </div>
 
 <div class="panel">
-{#
-<h2>第7回 車載オフ in 神奈川県</h2>
+<h2>第8回 春の車載オフ in 浜松</h2>
 <dl class="form">
-<dt>集合場所へのルート表示</dt>
+<dt>会場へのルート表示</dt>
 <dd>
 <select id="imakokoShasai">
 <option value="0">表示しない</option>
 <option value="1">表示する</option>
 </select>
 </dd>
-<dt>高速道路・有料道路の利用</dt>
+<dt>有料道路の利用</dt>
 <dd>
 <select id="imakokoShasaiRoute">
 <option value="0">利用しない</option>
@@ -87,9 +84,8 @@ function confirmOAuth() {
 </dd>
 </dl>
 <p>
-車載動画オフについては<a href="http://goo.gl/VAopo" target="_blank">こちら</a>
+車載動画オフについては<a href="http://eki.bz/caroff8th" target="_blank">こちら</a>
 </p>
-#}
 
 <h2>アカウント情報</h2>
 <dl class="form">

@@ -34,7 +34,7 @@ var geoLocator = {
 
 			var iMap = imakokoMap;
 			var markerCallback;
-			if (false && self.shasai == "1")
+			if (self.shasai == "1")
 				markerCallback = self.createShasaiCallback();
 			else
 				markerCallback = self.createGeocodeCallback();
@@ -53,7 +53,7 @@ var geoLocator = {
 				}
 			};
 
-			if (false && self.shasai == "1")
+			if (self.shasai == "1")
 				setTimeout(markerCallback, 5000);
 
 			setInterval(function() {
@@ -75,7 +75,7 @@ var geoLocator = {
 	createShasaiCallback : function() {
 		var directions = new google.maps.DirectionsService();
 		var renderer;
-		var noHighway = (this.shasaiRoute == "0");
+		var avoidTolls = (this.shasaiRoute == "0");
 		var waypoints = (this.shasaiTosu == "0") ? [] : [ { location : new google.maps.LatLng(33.395317, 130.537791), stopover : false } ];
 
 		var callback = function(result, status) {
@@ -86,14 +86,14 @@ var geoLocator = {
 			renderer.setDirections(result);
 
 			var leg = result.routes[0].legs[0];
-			var remaining = 1318638600000 - new Date().getTime();
+			var remaining = 1331359200000 - new Date().getTime();
 			var infoDiv = document.createElement("div");
-			infoDiv.appendChild(document.createTextNode("第7回 車載オフ"));
+			infoDiv.appendChild(document.createTextNode("第8回 車載動画オフ"));
 			infoDiv.appendChild(document.createElement("br"));
-			infoDiv.appendChild(document.createTextNode("集合場所まで: " + leg.distance.text + " " + leg.duration.text));
+			infoDiv.appendChild(document.createTextNode("オフ会場まで: " + leg.distance.text + " " + leg.duration.text));
 			if (remaining > 0) {
 				infoDiv.appendChild(document.createElement("br"));
-				infoDiv.appendChild(document.createTextNode("集合時刻まで: " + millisecToStr(remaining)));
+				infoDiv.appendChild(document.createTextNode("開場時刻まで: " + millisecToStr(remaining)));
 			}
 			imakokoMap.openInfoWindow(infoDiv, leg.start_location);
 		}
@@ -101,10 +101,9 @@ var geoLocator = {
 		return function() {
 			var coords = geoLocator.position.coords;
 			directions.route({
-				destination : new google.maps.LatLng(35.6013, 139.2),
+				destination : new google.maps.LatLng(34.7227, 137.604),
 				origin : new google.maps.LatLng(coords.latitude, coords.longitude),
-				avoidHighways : noHighway,
-				avoidTolls : noHighway,
+				avoidTolls : avoidTolls,
 				waypoints : waypoints,
 				travelMode : google.maps.TravelMode.DRIVING
 			}, callback);
