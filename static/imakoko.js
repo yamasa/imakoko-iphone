@@ -34,7 +34,7 @@ var geoLocator = {
 
 			var iMap = imakokoMap;
 			var markerCallback;
-			if (self.shasai == "1")
+			if (false && self.shasai == "1")
 				markerCallback = self.createShasaiCallback();
 			else
 				markerCallback = self.createGeocodeCallback();
@@ -53,7 +53,7 @@ var geoLocator = {
 				}
 			};
 
-			if (self.shasai == "1")
+			if (false && self.shasai == "1")
 				setTimeout(markerCallback, 5000);
 
 			setInterval(function() {
