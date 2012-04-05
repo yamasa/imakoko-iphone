@@ -86,7 +86,7 @@ var geoLocator = {
 			renderer.setDirections(result);
 
 			var leg = result.routes[0].legs[0];
-			var remaining = 1331359200000 - new Date().getTime();
+			var remaining = 1331359200000 - Date.now();
 			var infoDiv = document.createElement("div");
 			infoDiv.appendChild(document.createTextNode("第8回 車載動画オフ"));
 			infoDiv.appendChild(document.createElement("br"));
@@ -153,17 +153,6 @@ var geoLocator = {
 	}
 };
 
-function pad(val, len) {
-	val = String(val);
-	len = len || 2;
-	while (val.length < len) val = "0" + val;
-	return val;
-}
-function timestampToIso(timestamp) {
-	var date = new Date(timestamp);
-	return date.getUTCFullYear() + "-" + pad(date.getUTCMonth() + 1) + "-" + pad(date.getUTCDate()) + "T" + pad(date.getUTCHours()) + ":" + pad(date.getUTCMinutes()) + ":" + pad(date.getUTCSeconds()) + "." + pad(date.getUTCMilliseconds(), 3) + "Z";
-}
-
 var imakoko = {
 	url : "/api/post",
 	termtype : localStorage.imakokoTermType || "0",
@@ -204,7 +193,7 @@ var imakoko = {
 	post : function(async, position, now) {
 		var coords = position.coords;
 		var timestamp = position.timestamp;
-		var text = "time=" + encodeURIComponent(timestampToIso(timestamp))
+		var text = "time=" + encodeURIComponent(new Date(timestamp).toISOString())
 					+ "&lat=" + coords.latitude.toFixed(6) + "&lon=" + coords.longitude.toFixed(6);
 		if (coords.altitude != null) text += "&gpsh=" + coords.altitude.toFixed();
 		if (coords.heading != null && !isNaN(coords.heading)) text += "&gpsd=" + coords.heading.toFixed();
@@ -233,7 +222,7 @@ var imakoko = {
 			imakoko.post(true, position);
 		} else {
 			// そうでなくても、最後のpostから180秒以上経過していれば再postする。
-			var now = new Date().getTime();
+			var now = Date.now();
 			if (now - imakoko.lastTimestamp > 180000) {
 				imakoko.post(true, position, now);
 			}
