@@ -71,9 +71,18 @@ class TwitterCallbackPage(common.BasePage):
             account.twitter_secret = result['oauth_token_secret']
             self.put_with_new_sid(account)
             logging.info('(%d) Join: twitter="%s"', account.key().id(), account.twitter_user)
+            self.redirect('/settings.html')
+        elif reqtoken_result['oauth_token'] == self.request.get('denied'):
+            if account.twitter_user:
+                logging.info('(%d) Leave: twitter="%s"', account.key().id(), account.twitter_user)
+                account.twitter_user = None
+                account.twitter_token = None
+                account.twitter_secret = None
+                account.put()
+            self.redirect('/settings.html')
         else:
-            logging.debug('Unexpected request.')
-        self.redirect('/settings.html')
+            logging.error('Unexpected request.')
+            self.show_error_page()
 
 
 class TwitProxyPage(common.BasePage):
