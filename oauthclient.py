@@ -121,7 +121,7 @@ class TwitterClient(OAuthClient):
         OAuthClient.__init__(self, consumer_key, consumer_secret, OAuthSignatureMethod_HMAC_SHA1(), http_fetcher)
 
     def obtain_request_token(self, callback_url='oob'):
-        content = self.fetch_with_oauth_header('https://api.twitter.com/oauth/request_token', None, callback=callback_url)
+        content = self.fetch_with_oauth_header('https://api.twitter.com/oauth/request_token', '', callback=callback_url)
         parsed = cgi.parse_qs(content, True)
         token = parsed['oauth_token'][0]
         token_secret = parsed['oauth_token_secret'][0]
