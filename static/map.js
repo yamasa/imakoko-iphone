@@ -1,4 +1,4 @@
-var userIconBase = "http://www.fujita-lab.com/imakoko/user/";
+var userIconBase = "http://www.imacoconow.net/user/";
 var iconImages = [];
 var liveImages = [];
 var arrowImages = [];
