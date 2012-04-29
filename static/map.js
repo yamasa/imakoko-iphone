@@ -3,24 +3,15 @@ var iconImages = [];
 var liveImages = [];
 var arrowImages = [];
 (function() {
-	var iconDefs =
-		[{ path:"/img/car.png", ax:16, ay:16 },
-		 { path:"/img/keitai.png", ax:9, ay:20 },
-		 { path:"http://maps.google.co.jp/mapfiles/ms/icons/plane.png", ax:16, ay:16 },
-		 { path:"/img/train.png", ax:27, ay:22 },
-		 { path:"/img/shinkansen.png", ax:22, ay:21 },
-		 { path:"http://maps.google.co.jp/mapfiles/ms/icons/bus.png", ax:16, ay:16 },
-		 { path:"http://maps.google.co.jp/mapfiles/ms/icons/cycling.png", ax:16, ay:16 },
-		 { path:"http://maps.google.co.jp/mapfiles/ms/icons/hiker.png", ax:16, ay:16 },
-		 { path:"http://maps.google.co.jp/mapfiles/ms/icons/motorcycling.png", ax:16, ay:16 },
-		 { path:"http://maps.google.co.jp/mapfiles/ms/icons/helicopter.png", ax:16, ay:16 },
-		 { path:"http://maps.google.co.jp/mapfiles/ms/icons/ferry.png", ax:16, ay:16 }];
-	for (var i = 0; i < iconDefs.length; i++) {
-		var iconDef = iconDefs[i];
+	var iconPngs = [ "/img/car.png", "/img/keitai.png", "/img/plane.png", "/img/train.png", "/img/shinkansen.png", "/img/bus.png", "/img/cycling.png", "/img/hiker.png", "/img/motorcycling.png", "/img/helicopter.png", "/img/ferry.png" ];
+	for (var i = 0; i < iconPngs.length; i++) {
 		iconImages[i] = new google.maps.MarkerImage(
-			iconDef.path, null, null,
-			new google.maps.Point(iconDef.ax, iconDef.ay));
+			iconPngs[i], null, null,
+			new google.maps.Point(22, 22));
 	}
+	iconImages[98] = new google.maps.MarkerImage(
+		"/img/typhoon.png", null, null,
+		new google.maps.Point(22, 22));
 	var livePngs = [ "/img/ustream.png", "/img/justin.png", "/img/nicolive.png" ];
 	for (var i = 0; i < livePngs.length; i++)
 		liveImages[i] = new google.maps.MarkerImage(
