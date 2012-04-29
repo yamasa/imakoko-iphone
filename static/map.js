@@ -340,7 +340,8 @@ var imakokoMap = {
 				zoom : this.initialZoom,
 				center : latLng,
 				mapTypeId : google.maps.MapTypeId.ROADMAP,
-				mapTypeControl : false
+				mapTypeControl : false,
+				scaleControl : true
 			}
 		);
 		google.maps.event.addListener(this.googleMap, "dragstart", function() {
