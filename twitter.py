@@ -30,7 +30,7 @@ shorten_url_pattern = re.compile(re.escape('http://' + USER_MAP_HOSTNAME + '/m/'
 
 def shorten_url(matchobj):
     url = matchobj.group()
-    result = urlfetch.fetch('http://api.bit.ly/v3/shorten?login=' + BITLY_USERNAME + '&apiKey=' + BITLY_APIKEY + '&format=txt&domain=j.mp&longUrl=' + escape(url))
+    result = urlfetch.fetch('http://api.bitly.com/v3/shorten?login=' + BITLY_USERNAME + '&apiKey=' + BITLY_APIKEY + '&format=txt&domain=j.mp&longUrl=' + escape(url))
     if result.status_code != 200:
         logging.error('Cannot shorten URL. (%d %s)\n%s', result.status_code, result.content, url)
         raise Exception
