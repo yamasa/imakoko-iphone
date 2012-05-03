@@ -186,7 +186,8 @@ class ApiPostPage(common.BasePage):
             memcache.delete('IMAKOKO_' + sid_str + token)
             self.error(400)
             return
-
+        if status_code == 503:
+            status_code = 200
         self.response.status_int = status_code
 
 
