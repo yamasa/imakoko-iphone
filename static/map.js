@@ -32,8 +32,11 @@ var ImakokoMarker = function(map, latLng, user, nickname, type, dir, live, oncli
 	this.icon = iconImages[type] || iconImages[0];
 	this.arrow = (type == 0);
 	this.live = live;
+	this.info = null;
+	this.userMarker = null;
+	this.liveMarker = null;
 
-	var marker = new google.maps.Marker({
+	this.marker = new google.maps.Marker({
 		map : map,
 		positon : latLng,
 		icon : this.getIcon(dir),
@@ -43,12 +46,11 @@ var ImakokoMarker = function(map, latLng, user, nickname, type, dir, live, oncli
 		visible : true
 	});
 	if (onclickCallback != null) {
-		google.maps.event.addListener(marker, "click", function(event) {
+		google.maps.event.addListener(this.marker, "click", function(event) {
 			onclickCallback(self);
 		});
 	}
-	marker.setPosition(latLng);
-	this.marker = marker;
+	this.marker.setPosition(latLng);
 
 	if (user) {
 		this.userMarker = new google.maps.Marker({
@@ -71,9 +73,11 @@ var ImakokoMarker = function(map, latLng, user, nickname, type, dir, live, oncli
 };
 ImakokoMarker.prototype = {
 	getIcon : function(dir) {
-		if (!this.arrow || dir == null || isNaN(dir))
+		if (!this.arrow || dir == null)
 			return this.icon;
 		dir = Number(dir);
+		if (isNaN(dir))
+			return this.icon;
 		dir %= 360;
 		if (dir < 0) dir += 360;
 		return arrowImages[Math.round(dir / 10)];
@@ -139,8 +143,10 @@ var locTracer = {
 		if (p && Math.abs(latLng.lat() - p.lat()) < 0.0002 && Math.abs(latLng.lng() - p.lng()) < 0.0002) return;
 		this.prev = latLng;
 
-		var m = this.marks[this.cur];
-		if (!m) {
+		var m;
+		if (this.cur < this.marks.length) {
+			m = this.marks[this.cur];
+		} else {
 			m = new google.maps.Marker({
 				map : this.map,
 				positon : latLng,
@@ -150,7 +156,7 @@ var locTracer = {
 				flat : true,
 				visible : true
 			});
-			this.marks[this.cur] = m;
+			this.marks.push(m);
 		}
 		m.setPosition(latLng);
 
