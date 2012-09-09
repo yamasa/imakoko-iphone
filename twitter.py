@@ -22,7 +22,7 @@ BITLY_APIKEY = 'R_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 USER_MAP_HOSTNAME = 'imakoko-iphone.appspot.com'
 
 
-TWITTER_POST_URL = 'http://api.twitter.com/1/statuses/update.json'
+TWITTER_POST_URL = 'https://api.twitter.com/1.1/statuses/update.json'
 
 oauth_client = TwitterClient(CONSUMER_KEY, CONSUMER_SECRET)
 
