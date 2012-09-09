@@ -42,6 +42,7 @@ body > .toolbar {
 	right: 6px;
 	left: auto;
 	margin: 0;
+	border: solid transparent;
 	border-width: 0 5px;
 	padding: 0 3px;
 	line-height: 30px;
@@ -53,22 +54,22 @@ body > .toolbar {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	border-image: url(/img/toolButton.png) 0 5 0 5;
-	-webkit-border-image: url(/img/toolButton.png) 0 5 0 5;
-	-moz-border-image: url(/img/toolButton.png) 0 5 0 5;
-	-o-border-image: url(/img/toolButton.png) 0 5 0 5;
+	border-image: url(/img/toolButton.png) 0 5 fill;
+	-webkit-border-image: url(/img/toolButton.png) 0 5;
+	-moz-border-image: url(/img/toolButton.png) 0 5 fill;
+	-o-border-image: url(/img/toolButton.png) 0 5;
 }
 .toolbar > a.blueButton {
-	border-image: url(/img/blueButton.png) 0 5 0 5;
-	-webkit-border-image: url(/img/blueButton.png) 0 5 0 5;
-	-moz-border-image: url(/img/blueButton.png) 0 5 0 5;
-	-o-border-image: url(/img/blueButton.png) 0 5 0 5;
+	border-image: url(/img/blueButton.png) 0 5 fill;
+	-webkit-border-image: url(/img/blueButton.png) 0 5;
+	-moz-border-image: url(/img/blueButton.png) 0 5 fill;
+	-o-border-image: url(/img/blueButton.png) 0 5;
 }
 .toolbar > a.darkButton {
-	border-image: url(/img/darkButton.png) 0 5 0 5;
-	-webkit-border-image: url(/img/darkButton.png) 0 5 0 5;
-	-moz-border-image: url(/img/darkButton.png) 0 5 0 5;
-	-o-border-image: url(/img/darkButton.png) 0 5 0 5;
+	border-image: url(/img/darkButton.png) 0 5 fill;
+	-webkit-border-image: url(/img/darkButton.png) 0 5;
+	-moz-border-image: url(/img/darkButton.png) 0 5 fill;
+	-o-border-image: url(/img/darkButton.png) 0 5;
 }
 .toolbar > a.leftButton {
 	left: 6px;
@@ -79,9 +80,9 @@ body > .toolbar {
 	right: auto;
 	border-width: 0 8px 0 14px;
 	padding: 0;
-	border-image: url(/img/backButton.png) 0 8 0 14;
+	border-image: url(/img/backButton.png) 0 8 0 14 fill;
 	-webkit-border-image: url(/img/backButton.png) 0 8 0 14;
-	-moz-border-image: url(/img/backButton.png) 0 8 0 14;
+	-moz-border-image: url(/img/backButton.png) 0 8 0 14 fill;
 	-o-border-image: url(/img/backButton.png) 0 8 0 14;
 }
 body.landscape > .toolbar {
