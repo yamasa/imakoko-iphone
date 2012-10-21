@@ -34,7 +34,7 @@ var geoLocator = {
 
 			var iMap = imakokoMap;
 			var markerCallback;
-			if (false && self.shasai == "1")
+			if (self.shasai == "1")
 				markerCallback = self.createShasaiCallback();
 			else
 				markerCallback = self.createGeocodeCallback();
@@ -53,7 +53,7 @@ var geoLocator = {
 				}
 			};
 
-			if (false && self.shasai == "1")
+			if (self.shasai == "1")
 				setTimeout(markerCallback, 5000);
 
 			setInterval(function() {
@@ -86,9 +86,9 @@ var geoLocator = {
 			renderer.setDirections(result);
 
 			var leg = result.routes[0].legs[0];
-			var remaining = 1331359200000 - Date.now();
+			var remaining = 1353112200000 - Date.now();
 			var infoDiv = document.createElement("div");
-			infoDiv.appendChild(document.createTextNode("第8回 車載動画オフ"));
+			infoDiv.appendChild(document.createTextNode("第9回 車載動画オフ"));
 			infoDiv.appendChild(document.createElement("br"));
 			infoDiv.appendChild(document.createTextNode("オフ会場まで: " + leg.distance.text + " " + leg.duration.text));
 			if (remaining > 0) {
@@ -101,7 +101,7 @@ var geoLocator = {
 		return function() {
 			var coords = geoLocator.position.coords;
 			directions.route({
-				destination : new google.maps.LatLng(34.7227, 137.604),
+				destination : new google.maps.LatLng(35.012, 139.014),
 				origin : new google.maps.LatLng(coords.latitude, coords.longitude),
 				avoidTolls : avoidTolls,
 				waypoints : waypoints,
