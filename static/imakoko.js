@@ -86,9 +86,9 @@ var geoLocator = {
 			renderer.setDirections(result);
 
 			var leg = result.routes[0].legs[0];
-			var remaining = 1353112200000 - Date.now();
+			var remaining = 1362186000000 - Date.now();
 			var infoDiv = document.createElement("div");
-			infoDiv.appendChild(document.createTextNode("第9回 車載動画オフ"));
+			infoDiv.appendChild(document.createTextNode("第10回 車載動画オフ"));
 			infoDiv.appendChild(document.createElement("br"));
 			infoDiv.appendChild(document.createTextNode("オフ会場まで: " + leg.distance.text + " " + leg.duration.text));
 			if (remaining > 0) {
@@ -101,7 +101,7 @@ var geoLocator = {
 		return function() {
 			var coords = geoLocator.position.coords;
 			directions.route({
-				destination : new google.maps.LatLng(35.012, 139.014),
+				destination : new google.maps.LatLng(34.71192, 137.59384),
 				origin : new google.maps.LatLng(coords.latitude, coords.longitude),
 				avoidTolls : avoidTolls,
 				waypoints : waypoints,
