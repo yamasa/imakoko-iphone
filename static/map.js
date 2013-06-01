@@ -134,7 +134,7 @@ ImakokoMarker.prototype = {
 };
 
 var locTracer = {
-	max : 300,
+	max : 720,
 	marks : [],
 	cur : 0,
 	prev : null,
