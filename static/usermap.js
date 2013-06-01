@@ -80,6 +80,7 @@ function initMarkerCallback() {
 			locTracer.clear();
 			iMap.moveState = 0;
 			iMap.moveMap(marker.marker.getPosition());
+			iMap.startFetchTask();
 		}
 
 		iMap.needShowWindow = false;

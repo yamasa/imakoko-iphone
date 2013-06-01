@@ -3,6 +3,9 @@ var iconImages = [];
 var liveImages = [];
 var arrowImages = [];
 (function() {
+	if (!Date.now) {
+		Date.now = function() { return +new Date; };
+	}
 	var iconPngs = [ "/img/car.png", "/img/keitai.png", "/img/plane.png", "/img/train.png", "/img/shinkansen.png", "/img/bus.png", "/img/cycling.png", "/img/hiker.png", "/img/motorcycling.png", "/img/helicopter.png", "/img/ferry.png" ];
 	for (var i = 0; i < iconPngs.length; i++) {
 		iconImages[i] = new google.maps.MarkerImage(
@@ -194,6 +197,7 @@ var imakokoMap = {
 	markerCallback : null,
 	mapCenter : null,
 	moveState : 0,
+	idleTimeout : 0,
 	latestAll : [],
 	markers : {},
 
@@ -210,6 +214,7 @@ var imakokoMap = {
 		var latest = this.latestAll;
 		var oldMarkers = this.markers;
 		var newMarkers = {};
+		var isIdle = true;
 		this.gpsModeLive = null;
 
 		for (var i = 0; i < latest.length; i++) {
@@ -222,15 +227,16 @@ var imakokoMap = {
 			}
 
 			var latLng = new google.maps.LatLng(Number(data.lat), Number(data.lon));
-			var key = "." + user;
-			var marker = oldMarkers[key];
+			var marker = oldMarkers[user];
 			if (marker) {
-				delete oldMarkers[key];
+				delete oldMarkers[user];
 				marker.setPosition(latLng, data.dir, data.ustream_status);
 			} else
 				marker = new ImakokoMarker(this.googleMap, latLng, user, data.nickname, Number(data.type), data.dir, data.ustream_status, this.markerCallback);
-			newMarkers[key] = marker;
+			newMarkers[user] = marker;
 			if (isMainUser) {
+				isIdle = false;
+				this.idleTimeout = 0;
 				if (this.needUpdateTitle) {
 					if (this.staticMarker != null) {
 						this.staticMarker.destroy();
@@ -247,6 +253,14 @@ var imakokoMap = {
 		this.markers = newMarkers;
 		for (var key in oldMarkers)
 			oldMarkers[key].destroy();
+		if (isIdle && !this.gpsMode) {
+			var now = Date.now();
+			if (this.idleTimeout == 0) {
+				this.idleTimeout = now + 72000000;
+			} else if (this.idleTimeout < now) {
+				this.stopFetchTask();
+			}
+		}
 	},
 
 	moveMap : function(latLng) {
@@ -325,8 +339,11 @@ var imakokoMap = {
 
 	toUserListMode : function() {
 		this.userListMode = true;
-		this.stopFetchTask();
-		this.refresh();
+		if (this.stopFetchTask()) {
+			this.refresh();
+		} else {
+			this.fetchLatest();
+		}
 	},
 
 	initMap : function(latLng) {
@@ -394,6 +411,7 @@ var imakokoMap = {
 	},
 
 	startFetchTask : function() {
+		this.idleTimeout = 0;
 		if (this.taskIntervalId == null) {
 			this.taskIntervalId = setInterval(this.fetchLatest, this.taskInterval);
 			this.fetchLatest();
@@ -404,6 +422,9 @@ var imakokoMap = {
 		if (this.taskIntervalId != null) {
 			clearInterval(this.taskIntervalId);
 			this.taskIntervalId = null;
+			return true;
+		} else {
+			return false;
 		}
 	},
 
