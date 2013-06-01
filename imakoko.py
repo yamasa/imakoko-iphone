@@ -160,7 +160,7 @@ class AccountPage(common.BasePage):
 class ApiPostPage(common.BasePage):
     def post(self):
         sid_str = self.get_sid_str()
-        token = self.request.headers.get('X-Imakoko-Token')
+        token = self.request.headers.get('X-Imakoko-Token', '')
 
         auth_str = memcache.get('IMAKOKO_' + sid_str + token)
         if not auth_str:
