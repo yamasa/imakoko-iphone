@@ -256,7 +256,7 @@ var imakokoMap = {
 		if (isIdle && !this.gpsMode) {
 			var now = Date.now();
 			if (this.idleTimeout == 0) {
-				this.idleTimeout = now + 72000000;
+				this.idleTimeout = now + (locTracer.prev ? 72000000 : 7200000);
 			} else if (this.idleTimeout < now) {
 				this.stopFetchTask();
 			}
