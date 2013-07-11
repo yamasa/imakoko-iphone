@@ -347,6 +347,7 @@ var imakokoMap = {
 	},
 
 	initMap : function(latLng) {
+		google.maps.visualRefresh = true;
 		var self = this;
 		this.googleMap = new google.maps.Map(
 			document.getElementById("map_canvas"),
